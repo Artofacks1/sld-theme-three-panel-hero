@@ -1,0 +1,236 @@
+/* Service Features Module - Complete Design Breakdown */
+
+.service-features {
+  width: 100%;
+  position: relative;
+  background-color: #0a0a0a; /* Background Black */
+  border-top: 1px solid rgba(0, 180, 216, 0.1); /* 10% cyan border */
+}
+
+/* Section Title (Optional) */
+.service-features__title-wrapper {
+  text-align: center;
+  margin-bottom: 3rem; /* 48px */
+  padding: 0 1rem;
+}
+
+.service-features__title {
+  font-size: 2rem; /* Mobile */
+  font-weight: 700; /* Bold */
+  text-transform: uppercase;
+  letter-spacing: -0.025em; /* tracking-tight */
+  line-height: 1.25;
+  margin: 0;
+  display: block;
+  font-style: normal;
+  color: #ffffff; /* White */
+}
+
+@media screen and (min-width: 750px) {
+  .service-features__title {
+    font-size: 2.5rem; /* Tablet/Desktop */
+  }
+}
+
+/* Container max-width and padding adjustments */
+.service-features .page-width {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 750px) {
+  .service-features .page-width {
+    padding-left: 1.5rem; /* 24px tablet */
+    padding-right: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .service-features .page-width {
+    padding-left: 2rem; /* 32px desktop */
+    padding-right: 2rem;
+  }
+}
+
+/* Grid Layout - Flex with wrap */
+.service-features__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem; /* 32px spacing between cards */
+  width: 100%;
+}
+
+/* Feature Card Styles */
+.service-features__card {
+  position: relative;
+  background-color: transparent; /* Matches dark background */
+  border: none;
+  border-radius: 0px; /* Sharp corners */
+  padding: 2rem 1.5rem; /* 32px vertical, 24px horizontal */
+  min-height: auto; /* Content-driven */
+  width: 100%; /* Mobile: Full width, single column */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 300ms ease;
+}
+
+/* Tablet and Desktop - 3 equal columns with 32px spacing */
+/* With 3 items and gap: 2rem, we have 2 gaps = 4rem total gap space */
+@media screen and (min-width: 768px) {
+  .service-features__card {
+    width: calc((100% - 4rem) / 3); /* 3 equal columns: (100% - 2 gaps) / 3 */
+  }
+}
+
+/* Card Link - Makes entire card clickable */
+.service-features__card-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  text-decoration: none;
+  color: inherit;
+}
+
+.service-features__card-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Icon Container - 64px × 64px with border */
+.service-features__icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px; /* w-16 */
+  height: 64px; /* h-16 */
+  border: 2px solid rgba(0, 180, 216, 0.3); /* 30% opacity cyan - Default */
+  margin-bottom: 1rem; /* 16px gap below icon */
+  margin-left: auto;
+  margin-right: auto;
+  background: transparent;
+  transition: border-color 300ms ease; /* Only transition border */
+  border-radius: 0px; /* Sharp corners */
+}
+
+/* Icon Container - Hover State */
+/* Only border changes on hover - icon color, size, and text colors stay the same */
+.service-features__card:hover .service-features__icon-wrapper {
+  border-color: rgba(0, 180, 216, 1); /* Transitions from 30% to 100% cyan opacity */
+}
+
+.service-features__icon-svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; /* w-8 - Icon is 32px, container is 64px */
+  height: 32px; /* h-8 */
+  margin: 0 auto;
+}
+
+.service-features__icon-svg svg {
+  width: 32px; /* w-8 - Icon size */
+  height: 32px; /* h-8 */
+  display: block;
+  margin: 0 auto;
+  /* SVG has hardcoded stroke="#00b4d8" and stroke-width="2" */
+}
+
+.service-features__icon-image {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.service-features__icon-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Feature Title */
+.service-features__title-text {
+  font-size: 1rem; /* 16px - text-base */
+  font-weight: 700; /* Bold (font-bold) */
+  text-transform: uppercase;
+  letter-spacing: 0.05em; /* Wide tracking */
+  color: #ffffff; /* White */
+  margin: 0 0 0.5rem 0; /* 0 top/bottom, 8px bottom */
+  padding: 0;
+  line-height: 1.2;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+/* Feature Subtitle */
+.service-features__subtitle {
+  font-size: 0.875rem; /* 14px - slightly smaller */
+  font-weight: 400; /* Regular */
+  text-transform: uppercase;
+  letter-spacing: 0.1em; /* Extra-wide tracking */
+  color: rgba(255, 255, 255, 0.6); /* 60% white opacity - muted/subdued */
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  text-align: center;
+  width: 100%;
+  display: block;
+  /* No transition - text color stays same on hover */
+}
+
+/* Bottom Divider */
+.service-features__divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* 10% white */
+  width: 100%;
+  margin-top: 4rem; /* 64px (mt-16) */
+}
+
+/* Focus States for Accessibility */
+.service-features__card-link:focus-visible {
+  outline: 2px solid #00b4d8;
+  outline-offset: 2px;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 767px) {
+  .service-features__title-wrapper {
+    margin-bottom: 2rem; /* 32px on mobile */
+    padding: 0 1rem;
+  }
+
+  .service-features__grid {
+    gap: 1.5rem; /* 24px gap on mobile */
+  }
+
+  .service-features__card {
+    padding: 1.5rem 1rem; /* Tighter padding on mobile */
+  }
+
+  .service-features__icon-wrapper {
+    margin-bottom: 1rem; /* 16px on mobile */
+  }
+
+  .service-features__divider {
+    margin-top: 3rem; /* 48px on mobile */
+  }
+}
+
