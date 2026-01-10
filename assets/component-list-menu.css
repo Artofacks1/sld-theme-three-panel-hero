@@ -2,11 +2,63 @@
   right: 0;
 }
 
+/* SportsLive Decals Dropdown Menu - Sub-Navigation */
 .list-menu--disclosure {
   position: absolute;
-  min-width: 100%;
-  width: 20rem;
-  border: 1px solid rgba(var(--color-foreground), 0.2);
+  min-width: 200px;
+  width: auto;
+  border: 1px solid rgba(0, 180, 216, 0.3);
+  background-color: #141414;
+  border-radius: 0px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.list-menu--disclosure .list-menu__item {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+  font-size: 0.875rem;  /* 14px */
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  line-height: 1.5;
+  padding: 0.75rem 1rem;
+  transition: all 200ms ease;
+  position: relative;
+  font-family: var(--font-body-family); /* System font stack */
+}
+
+/* Section headers in dropdown (menu items without links or with specific styling) */
+.list-menu--disclosure .list-menu__item:not(.link),
+.list-menu--disclosure .list-menu__item[aria-disabled="true"] {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  cursor: default;
+  pointer-events: none;
+}
+
+.list-menu--disclosure .list-menu__item:not(.link):first-child,
+.list-menu--disclosure .list-menu__item[aria-disabled="true"]:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Hover state for dropdown items */
+.list-menu--disclosure .list-menu__item.link:hover {
+  color: #00b4d8;
+  font-weight: 600;
+  background-color: rgba(0, 180, 216, 0.05);
+}
+
+/* Active state */
+.list-menu--disclosure .list-menu__item--active {
+  color: #00b4d8;
+  font-weight: 600;
 }
 
 .list-menu--disclosure:focus {

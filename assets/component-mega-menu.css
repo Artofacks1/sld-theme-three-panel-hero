@@ -2,8 +2,9 @@
   position: static;
 }
 
+/* SportsLive Decals Mega Menu */
 .mega-menu__content {
-  background-color: rgb(var(--color-background));
+  background-color: #000000;
   border-left: 0;
   border-radius: 0;
   border-right: 0;  
@@ -43,14 +44,14 @@
 }
 
 .mega-menu__link {
-  color: rgba(var(--color-foreground), 0.75);
+  color: #ffffff;
   display: block;
-  font-size: 1.3rem;
-  line-height: calc(1 + 0.3 / var(--font-body-scale));
+  font-size: 0.875rem;
+  line-height: 1.5;
   padding-bottom: 0.6rem;
   padding-top: 0.6rem;
   text-decoration: none;
-  transition: text-decoration var(--duration-short) ease;
+  transition: all 0.3s ease;
   word-wrap: break-word;
 }
 
@@ -76,8 +77,9 @@
 
 .mega-menu__link:hover,
 .mega-menu__link--active {
-  color: rgb(var(--color-foreground));
+  color: #00b4d8;
   text-decoration: underline;
+  text-decoration-color: #00b4d8;
 }
 
 .mega-menu__link--active:hover {

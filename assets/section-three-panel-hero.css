@@ -1,34 +1,30 @@
+/* Three Column Hero Section - SportsLive Decals Design System */
+
 .three-panel-hero {
-  width: 100%;
+  width: 100vw; /* Full viewport width */
   position: relative;
+  overflow: hidden;
 }
 
 .three-panel-hero__container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr; /* Single column on mobile */
   width: 100%;
+  height: auto;
 }
 
 .three-panel-hero__panel {
   position: relative;
   width: 100%;
-  min-height: 40rem;
+  min-height: 400px; /* Mobile minimum */
+  height: auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   overflow: hidden;
-}
-
-.three-panel-hero__panel::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000000;
-  z-index: 1;
-  pointer-events: none;
+  clip-path: none; /* Straight edges on mobile */
 }
 
 .three-panel-hero__media {
@@ -46,165 +42,258 @@
   height: 100%;
   object-fit: cover;
   object-position: center center;
+  transform: scale(1);
+  filter: brightness(1);
+  transition: transform 700ms ease-out, filter 700ms ease-out;
 }
 
+/* Panel-specific background positioning */
+.three-panel-hero__panel:nth-child(1) .three-panel-hero__media img {
+  object-position: center; /* Helmet Decals - center */
+}
+
+.three-panel-hero__panel:nth-child(2) .three-panel-hero__media img {
+  object-position: center 30%; /* Flag Football - shifted up */
+}
+
+.three-panel-hero__panel:nth-child(3) .three-panel-hero__media img {
+  object-position: center; /* Trophies - center */
+}
+
+/* Dark Overlay */
+.three-panel-hero__panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* 70% black overlay */
+  z-index: 1;
+  pointer-events: none;
+  transition: background-color 500ms ease;
+}
+
+/* Bottom Accent Line */
+.three-panel-hero__panel::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #00b4d8; /* Cyan blue */
+  transform: scaleX(0); /* Invisible by default */
+  transform-origin: left;
+  z-index: 2;
+  transition: transform 500ms ease;
+}
+
+/* Content Container */
 .three-panel-hero__content {
   position: relative;
-  z-index: 2;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 3rem 2rem;
-  max-width: 90%;
+  padding: 2rem 1.5rem; /* 32px top/bottom, 24px sides */
   width: 100%;
-  color: rgb(255, 255, 255);
-}
-
-.three-panel-hero__title {
-  margin: 0 0 1.5rem 0;
-  color: rgb(255, 255, 255);
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  line-height: 1.2;
-}
-
-.three-panel-hero__description {
-  margin: 0 0 2rem 0;
-  color: rgb(255, 255, 255);
-  font-size: 1.6rem;
-  line-height: 1.5;
   max-width: 90%;
-  margin-left: auto;
-  margin-right: auto;
 }
 
+/* Title Typography (H2) */
+.three-panel-hero__title {
+  font-size: 2.25rem; /* 36px mobile (text-4xl) */
+  font-weight: 900; /* Black */
+  text-transform: uppercase;
+  letter-spacing: -0.025em; /* Tight tracking */
+  font-style: italic;
+  color: #ffffff;
+  margin: 0 0 1rem 0; /* 16px bottom margin */
+  line-height: 1.25;
+  transform: scale(1);
+  transition: transform 500ms ease;
+  text-shadow: 
+    2px 2px 8px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+/* Description Typography - Hidden on Mobile */
+.three-panel-hero__description {
+  display: none; /* Hidden on mobile (< 768px) */
+  margin: 0 0 2rem 0; /* 32px bottom margin */
+  color: rgba(255, 255, 255, 0.9); /* 90% opacity */
+  font-size: 0.875rem; /* 14px - will be updated in media queries */
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 20rem; /* 320px - keeps text compact */
+  transition: color 500ms ease;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+/* Button Wrapper */
 .three-panel-hero__button-wrapper {
-  margin-top: 2rem;
+  margin-top: 0;
+  position: relative;
+  z-index: 20; /* Ensures button is clickable */
 }
 
-/* Ensure buttons work with white text on overlay - set variables first */
-.three-panel-hero .button--primary {
-  --color-button: var(--color-base-accent-1);
-  --color-button-text: var(--color-base-solid-button-labels);
-  --alpha-button-background: 1;
-}
-
+/* CTA Button Styles */
 .three-panel-hero__button-wrapper .button {
-  background-color: rgba(var(--color-button), var(--alpha-button-background));
-  color: rgb(var(--color-button-text));
+  padding: 0.75rem 2rem; /* 12px vertical, 32px horizontal */
+  background-color: #00b4d8; /* Cyan blue */
+  color: #ffffff;
+  font-size: 0.75rem; /* 12px */
+  font-weight: 900; /* Black */
+  text-transform: uppercase;
+  letter-spacing: 0.1em; /* Widest tracking */
+  border: none;
+  border-radius: 0px; /* Sharp corners */
+  transform: scale(1);
+  transition: all 300ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  opacity: 1; /* Fully visible - no opacity */
 }
 
-/* Desktop styles - three columns */
-@media screen and (min-width: 750px) {
+/* Ensure disabled buttons are also fully visible */
+.three-panel-hero__button-wrapper .button:disabled,
+.three-panel-hero__button-wrapper .button[aria-disabled="true"],
+.three-panel-hero__button-wrapper .button.disabled {
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+
+/* Tablet Styles (768px - 1023px) */
+@media screen and (min-width: 768px) {
+  .three-panel-hero {
+    height: 50vh; /* 50% of viewport height */
+    min-height: 400px;
+    max-height: 600px;
+  }
+
   .three-panel-hero__container {
-    flex-direction: row;
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    height: 100%;
   }
 
   .three-panel-hero__panel {
-    width: 33.333%;
-    min-height: 56rem;
+    height: 100%;
+    min-height: 400px;
   }
 
-  .three-panel-hero__panel--hide-mobile {
-    display: flex;
+  /* Clip-paths for desktop */
+  .three-panel-hero__panel:nth-child(1) {
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%); /* Left Panel - 95% bottom-right angle */
   }
 
-  .three-panel-hero__content {
-    padding: 4rem 2.5rem;
+  .three-panel-hero__panel:nth-child(2) {
+    clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%); /* Middle Panel - 5% top/bottom angles */
+  }
+
+  .three-panel-hero__panel:nth-child(3) {
+    clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%); /* Right Panel - 5% top-left angle */
   }
 
   .three-panel-hero__title {
-    font-size: 3.6rem;
-    margin-bottom: 2rem;
+    font-size: 3rem; /* 48px tablet (text-5xl) */
   }
 
   .three-panel-hero__description {
-    font-size: 1.8rem;
-    margin-bottom: 2.5rem;
+    display: block; /* Visible on tablet+ */
+    font-size: 0.875rem; /* 14px tablet */
   }
 }
 
-/* Mobile styles - single panel, hide others */
-@media screen and (max-width: 749px) {
-  .three-panel-hero__panel {
-    min-height: 45rem;
-  }
-
-  .three-panel-hero__panel--hide-mobile {
-    display: none;
+/* Desktop Styles (1024px+) */
+@media screen and (min-width: 1024px) {
+  .three-panel-hero {
+    height: 50vh;
+    min-height: 400px;
+    max-height: 600px;
   }
 
   .three-panel-hero__title {
-    font-size: 2.8rem;
+    font-size: 3.75rem; /* 60px desktop (text-6xl) */
   }
 
   .three-panel-hero__description {
-    font-size: 1.5rem;
+    font-size: 1rem; /* 16px desktop */
   }
 }
 
-/* Large desktop enhancement */
-@media screen and (min-width: 1200px) {
-  .three-panel-hero__panel {
-    min-height: 65rem;
-  }
-
-  .three-panel-hero__content {
-    padding: 5rem 3rem;
-  }
-
-  .three-panel-hero__title {
-    font-size: 4.2rem;
-  }
-
-  .three-panel-hero__description {
-    font-size: 2rem;
-  }
-}
-
-/* Hover effects on desktop */
-@media screen and (min-width: 750px) {
-  .three-panel-hero__panel {
-    transition: transform 0.3s ease;
-  }
-
-  .three-panel-hero__panel:hover {
-    transform: scale(1.02);
-  }
-
+/* Hover Effects (Desktop Only - 768px+) */
+@media screen and (min-width: 768px) {
+  /* 1. Background Image Scale & Brightness (700ms - slowest) */
   .three-panel-hero__panel:hover .three-panel-hero__media img {
-    transform: scale(1.05);
-    transition: transform 0.5s ease;
+    transform: scale(1.1); /* Zooms to 110% */
+    filter: brightness(1.1); /* 10% brighter */
   }
 
-  .three-panel-hero__media img {
-    transition: transform 0.5s ease;
+  /* 2. Dark Overlay Fade (500ms) */
+  .three-panel-hero__panel:hover::after {
+    background-color: rgba(0, 0, 0, 0.5); /* 50% black overlay - 20% more visibility */
+  }
+
+  /* 3. Title Scale (500ms) */
+  .three-panel-hero__panel:hover .three-panel-hero__title {
+    transform: scale(1.05); /* Grows 5% */
+  }
+
+  /* 4. Description Color Shift (500ms - desktop only) */
+  .three-panel-hero__panel:hover .three-panel-hero__description {
+    color: rgba(255, 255, 255, 1); /* 100% white (fully opaque) */
+  }
+
+  /* 5. CTA Button Scale (500ms - when hovering panel) */
+  .three-panel-hero__panel:hover .three-panel-hero__button-wrapper .button {
+    transform: scale(1.1); /* Grows 10% */
+  }
+
+  /* 6. Bottom Accent Line Animation (500ms) */
+  .three-panel-hero__panel:hover::before {
+    transform: scaleX(1); /* Expands to 100% width */
   }
 }
 
-/* Heading size adjustments */
-.three-panel-hero__title.h0 {
-  font-size: 4.8rem;
+/* Button Direct Hover Effects (300ms - fastest) - Overrides panel hover */
+.three-panel-hero__button-wrapper .button:hover {
+  background-color: #ffffff !important; /* Changes from cyan to white */
+  color: #000000 !important; /* Text changes from white to black */
+  transform: scale(1.15) translateY(-2px) !important; /* Slightly larger when directly hovered, plus lift */
 }
 
-.three-panel-hero__title.h1 {
-  font-size: 3.6rem;
-}
-
-.three-panel-hero__title.h2 {
-  font-size: 2.8rem;
-}
-
-@media screen and (max-width: 749px) {
-  .three-panel-hero__title.h0 {
-    font-size: 3.2rem;
+/* Mobile Adjustments (< 768px) */
+@media screen and (max-width: 767px) {
+  .three-panel-hero {
+    height: auto; /* Auto height for stacking */
   }
 
-  .three-panel-hero__title.h1 {
-    font-size: 2.8rem;
+  .three-panel-hero__container {
+    grid-template-columns: 1fr; /* Single column */
   }
 
-  .three-panel-hero__title.h2 {
-    font-size: 2.4rem;
+  .three-panel-hero__panel {
+    clip-path: none; /* Remove clip-path on mobile - straight edges */
+    min-height: 400px;
+    width: 100%;
+  }
+
+  .three-panel-hero__description {
+    display: none; /* Hidden on mobile */
+  }
+
+  .three-panel-hero__content {
+    padding: 2rem 1.5rem; /* Tighter padding on mobile */
+  }
+
+  .three-panel-hero__title {
+    font-size: 2.25rem; /* 36px mobile */
   }
 }
 

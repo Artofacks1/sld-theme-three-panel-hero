@@ -1,0 +1,267 @@
+{{ 'section-shop-by-sport.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="shop-by-sport shop-by-sport-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    {%- if section.settings.show_title -%}
+      <div class="shop-by-sport__title-wrapper">
+        <h2 class="shop-by-sport__title">
+          <span class="shop-by-sport__title-text">SHOP BY</span>
+          <span class="shop-by-sport__title-accent">SPORT</span>
+        </h2>
+      </div>
+    {%- endif -%}
+
+    <div class="shop-by-sport__grid">
+      {%- for block in section.blocks limit: 5 -%}
+        {%- liquid
+          assign is_highlighted = block.settings.highlight
+          assign sport_name = block.settings.sport_name | default: 'Sport'
+          assign collection_url = block.settings.collection_url
+          assign icon_type = block.settings.icon_type
+          assign custom_icon = block.settings.custom_icon
+        -%}
+        
+        <div class="shop-by-sport__card{% if is_highlighted %} shop-by-sport__card--highlighted{% endif %}" {{ block.shopify_attributes }}>
+          {%- if collection_url != blank -%}
+            <a href="{{ collection_url }}" class="shop-by-sport__card-link" aria-label="{{ sport_name | escape }}">
+          {%- endif -%}
+          
+          <div class="shop-by-sport__card-content">
+            <div class="shop-by-sport__icon-wrapper">
+              {%- if custom_icon != blank -%}
+                <div class="shop-by-sport__icon-image">
+                  <img
+                    src="{{ custom_icon | image_url: width: 128 }}"
+                    srcset="{{ custom_icon | image_url: width: 128 }} 1x, {{ custom_icon | image_url: width: 256 }} 2x"
+                    alt="{{ sport_name | escape }} icon"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                  >
+                </div>
+              {%- elsif icon_type != blank -%}
+                <div class="shop-by-sport__icon-svg">
+                  {%- case icon_type -%}
+                    {%- when 'football' -%}
+                      {% render 'icon-sport-football' %}
+                    {%- when 'baseball' -%}
+                      {% render 'icon-sport-baseball' %}
+                    {%- when 'lacrosse' -%}
+                      {% render 'icon-sport-lacrosse' %}
+                    {%- when 'hockey' -%}
+                      {% render 'icon-sport-hockey' %}
+                    {%- when 'flag-football' -%}
+                      {% render 'icon-sport-flag-football' %}
+                  {%- endcase -%}
+                </div>
+              {%- endif -%}
+            </div>
+            
+            <h3 class="shop-by-sport__sport-name">
+              {{ sport_name | upcase | escape }}
+            </h3>
+          </div>
+          
+          {%- if collection_url != blank -%}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shop by Sport",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show section title",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sport",
+      "name": "Sport Card",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "sport_name",
+          "label": "Sport name",
+          "default": "Sport"
+        },
+        {
+          "type": "url",
+          "id": "collection_url",
+          "label": "Collection link"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Highlight card (cyan background)",
+          "default": false,
+          "info": "Use this to make one card stand out with a cyan blue background"
+        },
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon type",
+          "options": [
+            {
+              "value": "",
+              "label": "None"
+            },
+            {
+              "value": "football",
+              "label": "Football"
+            },
+            {
+              "value": "baseball",
+              "label": "Baseball"
+            },
+            {
+              "value": "lacrosse",
+              "label": "Lacrosse"
+            },
+            {
+              "value": "hockey",
+              "label": "Hockey"
+            },
+            {
+              "value": "flag-football",
+              "label": "Flag Football"
+            }
+          ],
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom icon image",
+          "info": "Upload a custom icon. If provided, this will override the icon type selection."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by Sport",
+      "blocks": [
+        {
+          "type": "sport",
+          "settings": {
+            "sport_name": "Football",
+            "highlight": true,
+            "icon_type": "football"
+          }
+        },
+        {
+          "type": "sport",
+          "settings": {
+            "sport_name": "Baseball",
+            "highlight": false,
+            "icon_type": "baseball"
+          }
+        },
+        {
+          "type": "sport",
+          "settings": {
+            "sport_name": "Lacrosse",
+            "highlight": false,
+            "icon_type": "lacrosse"
+          }
+        },
+        {
+          "type": "sport",
+          "settings": {
+            "sport_name": "Hockey",
+            "highlight": false,
+            "icon_type": "hockey"
+          }
+        },
+        {
+          "type": "sport",
+          "settings": {
+            "sport_name": "Flag Football",
+            "highlight": false,
+            "icon_type": "flag-football"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

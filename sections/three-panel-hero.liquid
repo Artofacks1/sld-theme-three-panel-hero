@@ -21,7 +21,7 @@
 <div class="three-panel-hero three-panel-hero-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
   <div class="three-panel-hero__container">
     {%- for block in section.blocks limit: 3 -%}
-      <div class="three-panel-hero__panel{% if forloop.index > 1 %} three-panel-hero__panel--hide-mobile{% endif %}" {{ block.shopify_attributes }}>
+      <div class="three-panel-hero__panel" {{ block.shopify_attributes }} data-panel-index="{{ forloop.index }}">
         {%- if block.settings.image != blank -%}
           <div class="three-panel-hero__media">
             <img

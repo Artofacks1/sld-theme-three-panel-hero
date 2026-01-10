@@ -2,33 +2,33 @@
 
 :root,
 .color-background-1 {
-  --color-foreground: var(--color-base-text);
-  --color-background: var(--color-base-background-1);
-  --gradient-background: var(--gradient-base-background-1);
+  --color-foreground: 255, 255, 255;
+  --color-background: 10, 10, 10;
+  --gradient-background: rgb(10, 10, 10);
 }
 
 .color-background-2 {
-  --color-foreground: var(--color-base-text);
-  --color-background: var(--color-base-background-2);
-  --gradient-background: var(--gradient-base-background-2);
+  --color-foreground: 255, 255, 255;
+  --color-background: 20, 20, 20;
+  --gradient-background: rgb(20, 20, 20);
 }
 
 .color-inverse {
-  --color-foreground: var(--color-base-background-1);
-  --color-background: var(--color-base-text);
-  --gradient-background: rgb(var(--color-base-text));
+  --color-foreground: 10, 10, 10;
+  --color-background: 255, 255, 255;
+  --gradient-background: rgb(255, 255, 255);
 }
 
 .color-accent-1 {
-  --color-foreground: var(--color-base-solid-button-labels);
-  --color-background: var(--color-base-accent-1);
-  --gradient-background: var(--gradient-base-accent-1);
+  --color-foreground: 10, 10, 10;
+  --color-background: 0, 180, 216;
+  --gradient-background: rgb(0, 180, 216);
 }
 
 .color-accent-2 {
-  --color-foreground: var(--color-base-solid-button-labels);
-  --color-background: var(--color-base-accent-2);
-  --gradient-background: var(--gradient-base-accent-2);
+  --color-foreground: 10, 10, 10;
+  --color-background: 0, 144, 179;
+  --gradient-background: rgb(0, 144, 179);
 }
 
 .color-foreground-outline-button {
@@ -59,8 +59,8 @@
 
 :root,
 .color-background-1 {
-  --color-button: var(--color-base-accent-1);
-  --color-button-text: var(--color-base-solid-button-labels);
+  --color-button: 0, 180, 216;
+  --color-button-text: 10, 10, 10;
   --alpha-button-background: 1;
   --alpha-button-border: 1;
 }
@@ -69,8 +69,8 @@
 .color-inverse,
 .color-accent-1,
 .color-accent-2 {
-  --color-button: var(--color-foreground);
-  --color-button-text: var(--color-background);
+  --color-button: 0, 180, 216;
+  --color-button-text: 10, 10, 10;
 }
 
 .button--secondary {
@@ -157,24 +157,24 @@
 
 .contains-card,
 .card {
-  --border-radius: var(--card-corner-radius);
-  --border-width: var(--card-border-width);
-  --border-opacity: var(--card-border-opacity);
-  --shadow-horizontal-offset: var(--card-shadow-horizontal-offset);
-  --shadow-vertical-offset: var(--card-shadow-vertical-offset);
-  --shadow-blur-radius: var(--card-shadow-blur-radius);
-  --shadow-opacity: var(--card-shadow-opacity);
+  --border-radius: 0px;
+  --border-width: 1px;
+  --border-opacity: 1;
+  --shadow-horizontal-offset: 0px;
+  --shadow-vertical-offset: 0px;
+  --shadow-blur-radius: 0px;
+  --shadow-opacity: 0;
 }
 
 .contains-content-container,
 .content-container {
-  --border-radius: var(--text-boxes-radius);
-  --border-width: var(--text-boxes-border-width);
-  --border-opacity: var(--text-boxes-border-opacity);
-  --shadow-horizontal-offset: var(--text-boxes-shadow-horizontal-offset);
-  --shadow-vertical-offset: var(--text-boxes-shadow-vertical-offset);
-  --shadow-blur-radius: var(--text-boxes-shadow-blur-radius);
-  --shadow-opacity: var(--text-boxes-shadow-opacity);
+  --border-radius: 0px;
+  --border-width: 1px;
+  --border-opacity: 1;
+  --shadow-horizontal-offset: 0px;
+  --shadow-vertical-offset: 0px;
+  --shadow-blur-radius: 0px;
+  --shadow-opacity: 0;
 }
 
 .contains-media,
@@ -211,9 +211,21 @@ html.no-js .no-js-hidden {
 }
 
 .page-width {
-  max-width: var(--page-width);
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1rem;  /* Mobile: 16px */
+}
+
+@media screen and (min-width: 640px) {
+  .page-width {
+    padding: 0 1.5rem;  /* Tablet: 24px */
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .page-width {
+    padding: 0 2rem;  /* Desktop: 32px */
+  }
 }
 
 .page-width-desktop {
@@ -223,7 +235,7 @@ html.no-js .no-js-hidden {
 
 @media screen and (min-width: 750px) {
   .page-width {
-    padding: 0 5rem;
+    padding: 0 1.5rem;
   }
 
   .page-width--narrow {
@@ -282,8 +294,16 @@ body,
 .color-inverse,
 .color-accent-1,
 .color-accent-2 {
-  color: rgba(var(--color-foreground), 0.75);
-  background-color: rgb(var(--color-background));
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgb(10, 10, 10);
+}
+
+.color-background-1 {
+  background-color: rgb(10, 10, 10);
+}
+
+.color-background-2 {
+  background-color: rgb(20, 20, 20);
 }
 
 .background-secondary {
@@ -359,12 +379,13 @@ body,
 }
 
 .text-body {
-  font-size: 1.5rem;
-  letter-spacing: 0.06rem;
-  line-height: calc(1 + 0.8 / var(--font-body-scale));
+  font-size: 1rem;
+  letter-spacing: 0em;
+  line-height: 1.75;
   font-family: var(--font-body-family);
-  font-style: var(--font-body-style);
-  font-weight: var(--font-body-weight);
+  font-style: normal;
+  font-weight: var(--font-weight-regular);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 h1,
@@ -379,65 +400,84 @@ h5,
 .h4,
 .h5 {
   font-family: var(--font-heading-family);
-  font-style: var(--font-heading-style);
-  font-weight: var(--font-heading-weight);
-  letter-spacing: calc(var(--font-heading-scale) * 0.06rem);
-  color: rgb(var(--color-foreground));
-  line-height: calc(1 + 0.3 / max(1, var(--font-heading-scale)));
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+  line-height: 1.25;
   word-break: break-word;
 }
 
+/* SportsLive Decals Typography - H0 (Hero) */
 .h0 {
-  font-size: calc(var(--font-heading-scale) * 4rem);
+  font-size: 3rem;  /* 48px mobile */
+  font-style: italic;
+  letter-spacing: -0.025em;
 }
 
-@media only screen and (min-width: 750px) {
+@media only screen and (min-width: 640px) {
   .h0 {
-    font-size: calc(var(--font-heading-scale) * 5.2rem);
+    font-size: 3.75rem;  /* 60px tablet */
   }
 }
 
+@media only screen and (min-width: 1024px) {
+  .h0 {
+    font-size: 4.5rem;  /* 72px desktop */
+  }
+}
+
+/* H1 - Large Headings */
 h1,
 .h1 {
-  font-size: calc(var(--font-heading-scale) * 3rem);
+  font-size: 2.25rem;  /* 36px mobile */
+  font-style: italic;
+  letter-spacing: -0.025em;
 }
 
 @media only screen and (min-width: 750px) {
   h1,
   .h1 {
-    font-size: calc(var(--font-heading-scale) * 4rem);
+    font-size: 3rem;  /* 48px desktop */
   }
 }
 
+/* H2 - Section Titles */
 h2,
 .h2 {
-  font-size: calc(var(--font-heading-scale) * 2rem);
+  font-size: 1.875rem;  /* 30px mobile */
+  font-style: italic;
+  letter-spacing: -0.025em;
 }
 
 @media only screen and (min-width: 750px) {
   h2,
   .h2 {
-    font-size: calc(var(--font-heading-scale) * 3.4rem);
+    font-size: 2.25rem;  /* 36px desktop */
   }
 }
 
+/* H3 - Subheadings */
 h3,
 .h3 {
-  font-size: calc(var(--font-heading-scale) * 1.7rem);
+  font-size: 1.25rem;  /* 20px mobile */
+  font-style: normal;
+  letter-spacing: 0.025em;
 }
 
 @media only screen and (min-width: 750px) {
   h3,
   .h3 {
-    font-size: calc(var(--font-heading-scale) * 1.8rem);
+    font-size: 1.5rem;  /* 24px desktop */
   }
 }
 
+/* H4 - Small Headings */
 h4,
 .h4 {
   font-family: var(--font-heading-family);
-  font-style: var(--font-heading-style);
-  font-size: calc(var(--font-heading-scale) * 1.5rem);
+  font-style: normal;
+  font-size: 1.25rem;  /* 20px */
+  letter-spacing: 0.025em;
 }
 
 h5,
@@ -977,10 +1017,21 @@ summary::-webkit-details-marker {
   row-gap: var(--grid-mobile-vertical-spacing);
 }
 
+/* Product grid: 24px gap */
+.product-grid {
+  column-gap: 24px;
+  row-gap: 24px;
+}
+
 @media screen and (min-width: 750px) {
   .grid {
     column-gap: var(--grid-desktop-horizontal-spacing);
     row-gap: var(--grid-desktop-vertical-spacing);
+  }
+  
+  .product-grid {
+    column-gap: 24px;
+    row-gap: 24px;
   }
 }
 
@@ -1247,6 +1298,7 @@ deferred-media {
 /* component-button */
 /* Button - default */
 
+/* SportsLive Decals Button System - Sharp Rectangular Design */
 .button,
 .shopify-challenge__button,
 .customer button,
@@ -1254,13 +1306,7 @@ button.shopify-payment-button__button--unbranded,
 .shopify-payment-button [role="button"],
 .cart__dynamic-checkout-buttons [role='button'],
 .cart__dynamic-checkout-buttons iframe {
-  --shadow-horizontal-offset: var(--buttons-shadow-horizontal-offset);
-  --shadow-vertical-offset: var(--buttons-shadow-vertical-offset);
-  --shadow-blur-radius: var(--buttons-shadow-blur-radius);
-  --shadow-opacity: var(--buttons-shadow-opacity);
-  --border-offset: var(--buttons-border-offset); /* reduce radius edge artifacts */
-  --border-opacity: calc(1 - var(--buttons-border-opacity));
-  border-radius: var(--buttons-radius-outset);
+  border-radius: 0px;
   position: relative;
 }
 
@@ -1268,8 +1314,8 @@ button.shopify-payment-button__button--unbranded,
 .shopify-challenge__button,
 .customer button,
 button.shopify-payment-button__button--unbranded {
-  min-width: calc(12rem + var(--buttons-border-width) * 2);
-  min-height: calc(4.5rem + var(--buttons-border-width) * 2);
+  min-width: auto;
+  min-height: auto;
 }
 
 .shopify-payment-button__button--branded {
@@ -1286,64 +1332,69 @@ button.shopify-payment-button__button--unbranded {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  border: 0;
-  padding: 0 3rem;
+  border: none;
+  padding: 1rem 1.5rem;
   cursor: pointer;
-  font: inherit;
-  font-size: 1.5rem;
+  font-family: var(--font-body-family);
+  font-size: 0.75rem;  /* 12px - Default size */
   text-decoration: none;
-  color: rgb(var(--color-button-text));
-  transition: box-shadow var(--duration-short) ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 900;
+  line-height: 1;
+  color: #0a0a0a;
+  transition: all 0.3s ease;
   -webkit-appearance: none;
   appearance: none;
-  background-color: rgba(var(--color-button), var(--alpha-button-background));
+  background-color: #00b4d8;
+  border-radius: 0px;
 }
 
-.button:before,
-.shopify-challenge__button:before,
-.customer button:before,
-.shopify-payment-button__button--unbranded:before,
-.shopify-payment-button [role="button"]:before,
-.cart__dynamic-checkout-buttons [role='button']:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
-  border-radius: var(--buttons-radius-outset);
-  box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) var(--shadow-blur-radius) rgba(var(--color-shadow), var(--shadow-opacity));
+/* Primary Button Hover - White background */
+.button:not([disabled]):hover,
+.button:not([disabled]):focus,
+.shopify-challenge__button:hover,
+.customer button:not([disabled]):hover {
+  background-color: #ffffff;
+  color: #0a0a0a;
+  transform: translateY(-2px);
 }
 
-.button:after,
-.shopify-challenge__button:after,
-.customer button:after,
-.shopify-payment-button__button--unbranded:after {
-  content: '';
-  position: absolute;
-  top: var(--buttons-border-width);
-  right: var(--buttons-border-width);
-  bottom: var(--buttons-border-width);
-  left: var(--buttons-border-width);
-  z-index: 1;
-  border-radius: var(--buttons-radius);
-  box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)),
-    0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background));
-  transition: box-shadow var(--duration-short) ease;
+.button--primary:not([disabled]):hover,
+.button--primary:not([disabled]):focus {
+  background-color: #ffffff;
+  color: #0a0a0a;
 }
 
-.button:not([disabled]):hover::after,
-.shopify-challenge__button:hover::after,
-.customer button:hover::after,
-.shopify-payment-button__button--unbranded:hover::after {
-  --border-offset: 1.3px;
-  box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)),
-    0 0 0 calc(var(--buttons-border-width) + 1px) rgba(var(--color-button), var(--alpha-button-background));
+/* Secondary Button (Outlined) */
+.button--secondary {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(0, 180, 216, 0.5);
+  border-radius: 0px;
 }
 
-.button--secondary:after {
-  --border-opacity: var(--buttons-border-opacity);
+.button--secondary:not([disabled]):hover,
+.button--secondary:not([disabled]):focus {
+  background-color: #00b4d8;
+  color: #0a0a0a;
+  border-color: #00b4d8;
+}
+
+/* Outline/Ghost Button */
+.button--tertiary,
+.button--outline {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: 0px;
+}
+
+.button--tertiary:not([disabled]):hover,
+.button--outline:not([disabled]):hover {
+  border-color: #00b4d8;
+  background-color: rgba(0, 180, 216, 0.1);
 }
 
 .button:focus-visible,
@@ -1353,10 +1404,8 @@ button.shopify-payment-button__button--unbranded {
 .shopify-payment-button [role="button"]:focus-visible,
 .shopify-payment-button__button--unbranded:focus,
 .shopify-payment-button [role="button"]:focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
-    0 0 0 0.5rem rgba(var(--color-foreground), 0.5),
-    0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+  outline: 2px solid #00b4d8;
+  outline-offset: 2px;
 }
 
 .button:focus:not(:focus-visible):not(.focused),
@@ -1375,20 +1424,22 @@ button.shopify-payment-button__button--unbranded {
 .button-label,
 .shopify-challenge__button,
 .customer button {
-  font-size: 1.5rem;
-  letter-spacing: 0.1rem;
-  line-height: calc(1 + 0.2 / var(--font-body-scale));
+  font-size: 0.75rem;  /* 12px - Default */
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+  font-weight: 900;
 }
 
-.button--tertiary {
-  font-size: 1.2rem;
-  padding: 1rem 1.5rem;
-  min-width: calc(9rem + var(--buttons-border-width) * 2);
-  min-height: calc(3.5rem + var(--buttons-border-width) * 2);
+/* Button Sizes */
+.button--large {
+  padding: 1.25rem 2rem;
+  font-size: 0.875rem;  /* 14px */
 }
 
 .button--small {
-  padding: 1.2rem 2.6rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.625rem;  /* 10px */
 }
 
 /* Button - other */
@@ -1616,25 +1667,26 @@ details[open] > .share-button__fallback {
   display: none;
 }
 
-/* component-form */
+/* component-form - SportsLive Decals Design System */
 .field__input,
 .select__select,
 .customer .field input,
 .customer select {
   -webkit-appearance: none;
   appearance: none;
-  background-color: rgb(var(--color-background));
-  color: rgb(var(--color-foreground));
-  font-size: 1.6rem;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-size: 1rem;
   width: 100%;
   box-sizing: border-box;
-  transition: box-shadow var(--duration-short) ease;
-  border-radius: var(--inputs-radius);
-  height: 4.5rem;
-  min-height: calc(var(--inputs-border-width) * 2);
-  min-width: calc(7rem + (var(--inputs-border-width) * 2));
+  transition: all 0.3s ease;
+  border-radius: 0px;
+  height: auto;
+  min-height: auto;
+  min-width: auto;
   position: relative;
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.875rem 1rem;
 }
 
 .field:before,
@@ -1643,15 +1695,7 @@ details[open] > .share-button__fallback {
 .customer select:before,
 .localization-form__select:before {
   pointer-events: none;
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border-radius: var(--inputs-radius-outset);
-  box-shadow: var(--inputs-shadow-horizontal-offset) var(--inputs-shadow-vertical-offset) var(--inputs-shadow-blur-radius) rgba(var(--color-base-text), var(--inputs-shadow-opacity));
-  z-index: -1;
+  content: none;
 }
 
 .field:after,
@@ -1660,56 +1704,37 @@ details[open] > .share-button__fallback {
 .customer select:after,
 .localization-form__select:after {
   pointer-events: none;
-  content: '';
-  position: absolute;
-  top: var(--inputs-border-width);
-  right: var(--inputs-border-width);
-  bottom: var(--inputs-border-width);
-  left: var(--inputs-border-width);
-  border: 0.1rem solid transparent;
-  border-radius: var(--inputs-radius);
-  box-shadow: 0 0 0 var(--inputs-border-width) rgba(var(--color-foreground), var(--inputs-border-opacity));
-  transition: box-shadow var(--duration-short) ease;
-  z-index: 1;
+  content: none;
 }
 
 .select__select {
   font-family: var(--font-body-family);
-  font-style: var(--font-body-style);
-  font-weight: var(--font-body-weight);
-  font-size: 1.2rem;
-  color: rgba(var(--color-foreground), 0.75);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #ffffff;
 }
 
-.field:hover.field:after,
-.select:hover.select:after,
-.select__select:hover.select__select:after,
-.customer .field:hover.field:after,
-.customer select:hover.select:after,
-.localization-form__select:hover.localization-form__select:after {
-  box-shadow: 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-foreground),var(--inputs-border-opacity));
-  outline: 0;
-  border-radius: var(--inputs-radius);
+.field__input:hover,
+.select__select:hover,
+.customer .field input:hover,
+.customer select:hover {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .field__input:focus-visible,
-.select__select:focus-visible,
-.customer .field input:focus-visible,
-.customer select:focus-visible,
-.localization-form__select:focus-visible.localization-form__select:after {
-  box-shadow: 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-foreground));
-  outline: 0;
-  border-radius: var(--inputs-radius);
-}
-
 .field__input:focus,
+.select__select:focus-visible,
 .select__select:focus,
+.customer .field input:focus-visible,
 .customer .field input:focus,
+.customer select:focus-visible,
 .customer select:focus,
-.localization-form__select:focus.localization-form__select:after {
-  box-shadow: 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-foreground));
-  outline: 0;
-  border-radius: var(--inputs-radius);
+.localization-form__select:focus-visible,
+.localization-form__select:focus {
+  border-color: #00b4d8;
+  outline: none;
+  border-radius: 0px;
 }
 
 .localization-form__select:focus {
@@ -1772,16 +1797,15 @@ details[open] > .share-button__fallback {
 
 .field__label,
 .customer .field label {
-  font-size: 1.6rem;
-  left: calc(var(--inputs-border-width) + 2rem);
-  top: calc(1rem + var(--inputs-border-width));
+  font-size: 1rem;
+  left: 1rem;
+  top: 0.875rem;
   margin-bottom: 0;
   pointer-events: none;
   position: absolute;
-  transition: top var(--duration-short) ease,
-    font-size var(--duration-short) ease;
-  color: rgba(var(--color-foreground), 0.75);
-  letter-spacing: 0.1rem;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0em;
   line-height: 1.5;
 }
 
@@ -1791,10 +1815,10 @@ details[open] > .share-button__fallback {
 .customer .field input:focus ~ label,
 .customer .field input:not(:placeholder-shown) ~ label,
 .customer .field input:-webkit-autofill ~ label {
-  font-size: 1rem;
-  top: calc(var(--inputs-border-width) + 0.5rem);
-  left: calc(var(--inputs-border-width) + 2rem);
-  letter-spacing: 0.04rem;
+  font-size: 0.75rem;
+  top: 0.5rem;
+  left: 1rem;
+  letter-spacing: 0em;
 }
 
 .field__input:focus,
@@ -1803,8 +1827,8 @@ details[open] > .share-button__fallback {
 .customer .field input:focus,
 .customer .field input:not(:placeholder-shown),
 .customer .field input:-webkit-autofill {
-  padding: 2.2rem 1.5rem 0.8rem 2rem;
-  margin: var(--inputs-border-width);
+  padding: 1.625rem 1rem 0.375rem 1rem;
+  margin: 0;
 }
 
 .field__input::-webkit-search-cancel-button,
@@ -2191,15 +2215,20 @@ input[type='checkbox'] {
   transition: transform 0.15s ease-out;
 }
 
-/* Main Header Layout */
+/* SportsLive Decals Header Styles */
 .header-wrapper {
   display: block;
   position: relative;
-  background-color: rgb(var(--color-background));
+  background-color: #000000;
+}
+
+/* Sticky header maintains solid black background */
+.shopify-section-header-sticky .header-wrapper {
+  background-color: #000000;
 }
 
 .header-wrapper--border-bottom {
-  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  border-bottom: 1px solid rgba(0, 180, 216, 0.15);
 }
 
 .header {
@@ -2282,8 +2311,9 @@ input[type='checkbox'] {
 }
 
 .header__heading-logo {
-  height: auto;
-  width: 100%;
+  height: 56px;  /* Logo height: 56px */
+  width: auto;
+  max-width: 100%;
 }
 
 @media screen and (max-width: 989px) {
@@ -2325,7 +2355,7 @@ input[type='checkbox'] {
 }
 
 .header__icon {
-  color: rgb(var(--color-foreground));
+  color: #ffffff;
 }
 
 .header__icon span {
@@ -2357,6 +2387,25 @@ input[type='checkbox'] {
 .header__icon--cart {
   position: relative;
   margin-right: -1.2rem;
+}
+
+/* SportsLive Decals Search Icon - Light Blue Square Border */
+.header__icon--search {
+  border: 1px solid #00b4d8;
+  border-radius: 0px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__icon--search .icon {
+  color: #00b4d8;
+}
+
+.header__icon--search:hover {
+  border-color: #00b4d8;
+  background-color: rgba(0, 180, 216, 0.1);
 }
 
 @media screen and (max-width: 989px) {
@@ -2577,31 +2626,58 @@ details[open] > .header__submenu {
   padding: 0 1rem;
 }
 
+/* SportsLive Decals Navigation Menu Styles - Main Navigation (Top-Level Links) */
 .header__menu-item {
   padding: 1.2rem;
   text-decoration: none;
-  color: rgba(var(--color-foreground), 0.75);
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  font-size: 1rem;  /* 16px */
+  line-height: 1;
+  position: relative;
+  transition: color 300ms ease;
+  font-family: var(--font-body-family); /* System font stack */
+}
+
+.header__menu-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #00b4d8;
+  transition: width 300ms ease;
 }
 
 .header__menu-item:hover {
-  color: rgb(var(--color-foreground));
+  color: #00b4d8;
+}
+
+.header__menu-item:hover::after {
+  width: 100%;
 }
 
 .header__menu-item span {
-  transition: text-decoration var(--duration-short) ease;
-}
-
-.header__menu-item:hover span {
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  transition: color 300ms ease;
 }
 
 details[open] > .header__menu-item {
-  text-decoration: underline;
+  color: #00b4d8;
+}
+
+details[open] > .header__menu-item::after {
+  width: 100%;
 }
 
 details[open]:hover > .header__menu-item {
-  text-decoration-thickness: 0.2rem;
+  color: #00b4d8;
+}
+
+details[open]:hover > .header__menu-item::after {
+  width: 100%;
 }
 
 details[open] > .header__menu-item .icon-caret {
@@ -2609,14 +2685,12 @@ details[open] > .header__menu-item .icon-caret {
 }
 
 .header__active-menu-item {
-  transition: text-decoration-thickness var(--duration-short) ease;
-  color: rgb(var(--color-foreground));
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  transition: color 300ms ease;
+  color: #00b4d8;
 }
 
-.header__menu-item:hover .header__active-menu-item {
-  text-decoration-thickness: 0.2rem;
+.header__active-menu-item::after {
+  width: 100% !important;
 }
 
 .header__submenu {
@@ -2624,23 +2698,29 @@ details[open] > .header__menu-item .icon-caret {
     transform var(--duration-default) ease;
 }
 
+/* SportsLive Decals Dropdown Menu Styles - Sub-Navigation */
 .global-settings-popup,
 .header__submenu.global-settings-popup {
-  border-radius: var(--popup-corner-radius);
-  border-color: rgba(var(--color-foreground), var(--popup-border-opacity));
-  border-style: solid;
-  border-width: var(--popup-border-width);
-  box-shadow: var(--popup-shadow-horizontal-offset) var(--popup-shadow-vertical-offset) var(--popup-shadow-blur-radius) rgba(var(--color-shadow), var(--popup-shadow-opacity));
+  border-radius: 0px;
+  border: 1px solid rgba(0, 180, 216, 0.3);
+  background-color: #141414;
+  box-shadow: none;
+  min-width: 200px;
+  padding: 1rem;
 }
 
 .header__submenu.list-menu {
-  padding: 2.4rem 0;
+  padding: 1rem;
+  background-color: #141414;
+  border: 1px solid rgba(0, 180, 216, 0.3);
+  border-radius: 0px;
 }
 
 .header__submenu .header__submenu {
-  background-color: rgba(var(--color-foreground), 0.03);
-  padding: 0.5rem 0;
-  margin: 0.5rem 0;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
 }
 
 .header__submenu .header__menu-item:after {
@@ -2648,8 +2728,58 @@ details[open] > .header__menu-item .icon-caret {
 }
 
 .header__submenu .header__menu-item {
-  justify-content: space-between;
-  padding: 0.8rem 2.4rem;
+  justify-content: flex-start;
+  padding: 0.75rem 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+  font-size: 0.875rem;  /* 14px */
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  line-height: 1.5;
+  transition: all 200ms ease;
+  position: relative;
+  font-family: var(--font-body-family); /* System font stack */
+}
+
+/* Section headers in dropdown - menu items without href or disabled */
+.header__submenu .header__menu-item:not([href]),
+.header__submenu .header__menu-item[aria-disabled="true"],
+.header__submenu summary.header__menu-item {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  cursor: default;
+  pointer-events: none;
+}
+
+.header__submenu .header__menu-item:not([href]):first-child,
+.header__submenu .header__menu-item[aria-disabled="true"]:first-child,
+.header__submenu summary.header__menu-item:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Hover state for dropdown items with links */
+.header__submenu .header__menu-item[href]:hover {
+  color: #00b4d8;
+  font-weight: 600;
+  background-color: rgba(0, 180, 216, 0.05);
+}
+
+/* Icon support for dropdown items (like hard hat icon) */
+.header__submenu .header__menu-item .icon {
+  margin-right: 0.75rem;
+  color: #00b4d8;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
 }
 
 .header__submenu .header__submenu .header__menu-item {
@@ -2700,19 +2830,44 @@ details-disclosure > details {
   }
 }
 
+/* SportsLive Decals Badge Styles */
 .badge {
   border: 1px solid transparent;
-  border-radius: var(--badge-corner-radius);
+  border-radius: 0px;
   display: inline-block;
-  font-size: 1.2rem;
-  letter-spacing: 0.1rem;
+  font-size: 0.75rem;  /* 12px */
+  letter-spacing: 0.15em;
   line-height: 1;
-  padding: 0.6rem 1.3rem;
+  padding: 0.5rem 1.5rem;
   text-align: center;
-  background-color: rgb(var(--color-badge-background));
-  border-color: rgba(var(--color-badge-border), var(--alpha-badge-border));
-  color: rgb(var(--color-foreground));
+  background-color: rgba(0, 180, 216, 0.05);
+  border-color: rgba(0, 180, 216, 0.3);
+  color: #00b4d8;
+  text-transform: uppercase;
+  font-weight: 900;
   word-break: break-word;
+}
+
+/* Solid Badge */
+.badge--solid,
+.color-accent-1 .badge,
+.color-accent-2 .badge {
+  background-color: #00b4d8;
+  border-color: #00b4d8;
+  color: #0a0a0a;
+  letter-spacing: 0.1em;
+}
+
+/* Sale Badge */
+.badge--sale,
+.color-accent-2 .badge:contains("sale"),
+.color-accent-2 .badge:contains("Sale") {
+  background-color: #d4183d;
+  border-color: #d4183d;
+  color: #ffffff;
+  font-size: 0.6875rem;  /* 11px */
+  padding: 0.375rem 0.875rem;
+  letter-spacing: 0.1em;
 }
 
 .gradient {
@@ -2746,24 +2901,14 @@ details-disclosure > details {
 }
 
 .content-container {
-  border-radius: var(--text-boxes-radius);
-  border: var(--text-boxes-border-width) solid rgba(var(--color-foreground), var(--text-boxes-border-opacity));
+  border-radius: 0px;
+  border: 1px solid rgba(0, 180, 216, 0.15);
   position: relative;
+  background-color: #141414;
 }
 
 .content-container:after {
-  content: '';
-  position: absolute;
-  top: calc(var(--text-boxes-border-width) * -1);
-  right: calc(var(--text-boxes-border-width) * -1);
-  bottom: calc(var(--text-boxes-border-width) * -1);
-  left: calc(var(--text-boxes-border-width) * -1);
-  border-radius: var(--text-boxes-radius);
-  box-shadow: var(--text-boxes-shadow-horizontal-offset)
-    var(--text-boxes-shadow-vertical-offset)
-    var(--text-boxes-shadow-blur-radius)
-    rgba(var(--color-shadow), var(--text-boxes-shadow-opacity));
-  z-index: -1;
+  content: none;
 }
 
 .content-container--full-width:after {
@@ -2883,7 +3028,7 @@ details-disclosure > details {
   background-color:#F1F1F1;
   width: 100%;
   max-width: 340px;
-  border-radius: 10px;
+  border-radius: 0px;
 }
 .calculator-input {
   display:flex;
@@ -2897,8 +3042,8 @@ details-disclosure > details {
   color:#FFFFFF;
   font-weight: bold;
   padding: 5px 20px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 #result-price {
   display:flex;
@@ -2914,7 +3059,7 @@ details-disclosure > details {
   width: 70%;
 }
 .calculator-input input:focus {
-  border-radius:5px;
+  border-radius: 0px;
 }
 
 #input-text {
