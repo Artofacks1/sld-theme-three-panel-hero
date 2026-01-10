@@ -1,0 +1,65 @@
+#QuoteForm .form-field {
+  margin-top: 1.5rem;
+}
+#QuoteForm .star-mark {
+  color: red;
+  margin-left: 0.5rem;
+}
+#QuoteForm .field__input {
+  border: 1px solid;
+  padding: 1.5rem !important;
+}
+#QuoteForm .field__input[type="file"] {
+  padding: 1rem 1.5rem !important;
+}
+#QuoteForm .field__input::placeholder {
+  color: rgba(0,0,0,0.5) !important;
+  opacity: 1 !important;
+}
+#QuoteForm .field__input::-ms-input-placeholder {
+  color: rgba(0,0,0,0.5) !important;
+  opacity: 1 !important;
+}
+.contact img {
+  max-width: 100%;
+}
+
+.contact .form__message {
+  align-items: flex-start;
+}
+
+.contact .icon-success {
+  margin-top: 0.2rem;
+}
+
+.contact .field {
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .contact .field {
+    margin-bottom: 2rem;
+  }
+}
+
+.contact__button {
+  margin-top: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .contact__button {
+    margin-top: 4rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .contact__fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 2rem;
+  }
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
+}

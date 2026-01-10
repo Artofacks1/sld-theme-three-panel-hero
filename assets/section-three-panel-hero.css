@@ -1,0 +1,210 @@
+.three-panel-hero {
+  width: 100%;
+  position: relative;
+}
+
+.three-panel-hero__container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.three-panel-hero__panel {
+  position: relative;
+  width: 100%;
+  min-height: 40rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.three-panel-hero__panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.three-panel-hero__media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.three-panel-hero__media img,
+.three-panel-hero__media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.three-panel-hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 3rem 2rem;
+  max-width: 90%;
+  width: 100%;
+  color: rgb(255, 255, 255);
+}
+
+.three-panel-hero__title {
+  margin: 0 0 1.5rem 0;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  line-height: 1.2;
+}
+
+.three-panel-hero__description {
+  margin: 0 0 2rem 0;
+  color: rgb(255, 255, 255);
+  font-size: 1.6rem;
+  line-height: 1.5;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.three-panel-hero__button-wrapper {
+  margin-top: 2rem;
+}
+
+/* Ensure buttons work with white text on overlay - set variables first */
+.three-panel-hero .button--primary {
+  --color-button: var(--color-base-accent-1);
+  --color-button-text: var(--color-base-solid-button-labels);
+  --alpha-button-background: 1;
+}
+
+.three-panel-hero__button-wrapper .button {
+  background-color: rgba(var(--color-button), var(--alpha-button-background));
+  color: rgb(var(--color-button-text));
+}
+
+/* Desktop styles - three columns */
+@media screen and (min-width: 750px) {
+  .three-panel-hero__container {
+    flex-direction: row;
+  }
+
+  .three-panel-hero__panel {
+    width: 33.333%;
+    min-height: 56rem;
+  }
+
+  .three-panel-hero__panel--hide-mobile {
+    display: flex;
+  }
+
+  .three-panel-hero__content {
+    padding: 4rem 2.5rem;
+  }
+
+  .three-panel-hero__title {
+    font-size: 3.6rem;
+    margin-bottom: 2rem;
+  }
+
+  .three-panel-hero__description {
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* Mobile styles - single panel, hide others */
+@media screen and (max-width: 749px) {
+  .three-panel-hero__panel {
+    min-height: 45rem;
+  }
+
+  .three-panel-hero__panel--hide-mobile {
+    display: none;
+  }
+
+  .three-panel-hero__title {
+    font-size: 2.8rem;
+  }
+
+  .three-panel-hero__description {
+    font-size: 1.5rem;
+  }
+}
+
+/* Large desktop enhancement */
+@media screen and (min-width: 1200px) {
+  .three-panel-hero__panel {
+    min-height: 65rem;
+  }
+
+  .three-panel-hero__content {
+    padding: 5rem 3rem;
+  }
+
+  .three-panel-hero__title {
+    font-size: 4.2rem;
+  }
+
+  .three-panel-hero__description {
+    font-size: 2rem;
+  }
+}
+
+/* Hover effects on desktop */
+@media screen and (min-width: 750px) {
+  .three-panel-hero__panel {
+    transition: transform 0.3s ease;
+  }
+
+  .three-panel-hero__panel:hover {
+    transform: scale(1.02);
+  }
+
+  .three-panel-hero__panel:hover .three-panel-hero__media img {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+  }
+
+  .three-panel-hero__media img {
+    transition: transform 0.5s ease;
+  }
+}
+
+/* Heading size adjustments */
+.three-panel-hero__title.h0 {
+  font-size: 4.8rem;
+}
+
+.three-panel-hero__title.h1 {
+  font-size: 3.6rem;
+}
+
+.three-panel-hero__title.h2 {
+  font-size: 2.8rem;
+}
+
+@media screen and (max-width: 749px) {
+  .three-panel-hero__title.h0 {
+    font-size: 3.2rem;
+  }
+
+  .three-panel-hero__title.h1 {
+    font-size: 2.8rem;
+  }
+
+  .three-panel-hero__title.h2 {
+    font-size: 2.4rem;
+  }
+}
+

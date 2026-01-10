@@ -1,0 +1,238 @@
+{{ 'section-three-panel-hero.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .three-panel-hero-{{ section.id }} .three-panel-hero__panel::after {
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  }
+  
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="three-panel-hero three-panel-hero-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  <div class="three-panel-hero__container">
+    {%- for block in section.blocks limit: 3 -%}
+      <div class="three-panel-hero__panel{% if forloop.index > 1 %} three-panel-hero__panel--hide-mobile{% endif %}" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          <div class="three-panel-hero__media">
+            <img
+              srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | image_url: width: 375 }} 375w,{%- endif -%}
+                {%- if block.settings.image.width >= 550 -%}{{ block.settings.image | image_url: width: 550 }} 550w,{%- endif -%}
+                {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+                {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                {%- if block.settings.image.width >= 1780 -%}{{ block.settings.image | image_url: width: 1780 }} 1780w,{%- endif -%}
+                {%- if block.settings.image.width >= 2000 -%}{{ block.settings.image | image_url: width: 2000 }} 2000w,{%- endif -%}
+                {%- if block.settings.image.width >= 3000 -%}{{ block.settings.image | image_url: width: 3000 }} 3000w,{%- endif -%}
+                {%- if block.settings.image.width >= 3840 -%}{{ block.settings.image | image_url: width: 3840 }} 3840w,{%- endif -%}
+                {{ block.settings.image | image_url }} {{ block.settings.image.width }}w"
+              sizes="{% if section.blocks.size == 3 %}(min-width: 750px) calc(100vw / 3), 100vw{% else %}(min-width: 750px) calc(100vw / {{ section.blocks.size }}), 100vw{% endif %}"
+              src="{{ block.settings.image | image_url: width: 1500 }}"
+              loading="{% if forloop.index == 1 %}eager{% else %}lazy{% endif %}"
+              alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.width | divided_by: block.settings.image.aspect_ratio }}"
+            >
+          </div>
+        {%- else -%}
+          <div class="three-panel-hero__media">
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+        
+        <div class="three-panel-hero__content">
+          {%- if block.settings.title != blank -%}
+            <h2 class="three-panel-hero__title {{ block.settings.heading_size }}">
+              {{ block.settings.title | escape }}
+            </h2>
+          {%- endif -%}
+          
+          {%- if block.settings.description != blank -%}
+            <div class="three-panel-hero__description">
+              {{ block.settings.description | escape }}
+            </div>
+          {%- endif -%}
+          
+          {%- if block.settings.button_label != blank -%}
+            <div class="three-panel-hero__button-wrapper">
+              <a{% if block.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link }}"{% endif %} class="button button--primary">
+                {{ block.settings.button_label | escape }}
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Three Panel Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Image overlay opacity",
+      "default": 40,
+      "info": "Adjust the darkness of the overlay on background images to improve text readability"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Panel",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Panel title"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
+            }
+          ],
+          "default": "h1",
+          "label": "t:sections.all.heading_size.label"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Add a description for this panel"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Three Panel Hero",
+      "blocks": [
+        {
+          "type": "panel",
+          "settings": {
+            "title": "Helmet Decals",
+            "description": "Get your team ready with the world's highest quality helmet decals.",
+            "button_label": "SHOP DECALS →"
+          }
+        },
+        {
+          "type": "panel",
+          "settings": {
+            "title": "Flag Football",
+            "description": "Customized solutions for your team needs and game-day essentials.",
+            "button_label": "BROWSE GEAR →"
+          }
+        },
+        {
+          "type": "panel",
+          "settings": {
+            "title": "Trophies",
+            "description": "Championship-grade awards and trophies for winners.",
+            "button_label": "SHOP TROPHIES →"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

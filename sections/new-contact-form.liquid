@@ -1,0 +1,1101 @@
+<style>
+    .checkboxes {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .radio-button{
+      margin: 36px 0;
+    }
+  .checkboxes{
+    margin-top:36px;
+  }
+  .other-option{
+    margin-top:36px !important;
+  }
+    .checkbox label {
+        font-size: 20px;
+    }
+
+    .checkbox {
+        width: 33.33%;
+        padding: 0 20px;
+    }
+
+    .checkbox h2 {
+        text-align: center;
+    }
+
+    .checkbox div {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .checkbox input[type="checkbox"] {
+        accent-color: #000;
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+
+    .other-option,
+    .budget {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .budget_label {
+        border: none;
+        outline: none;
+        padding: 15px 20px;
+        background-color: #fff;
+        cursor: pointer;
+        font-size: 18px;
+        background-color: #000;
+        color: white !important;
+    }
+
+    .active,
+    .budget_label:hover {
+        color: white;
+        background-color: #334FB4;
+    }
+
+    .budget-options {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        row-gap: 35px;
+    }
+
+    #textboxContainer {
+        display: none;
+    }
+
+    .select-field select{
+      background: url(https://cdn.shopify.com/s/files/1/0613/0112/9376/files/icons8-expand-arrow-50.png?v=1712459827);
+      background-repeat: no-repeat;
+      background-position: 98%;
+      background-size: 15px;
+  }
+
+    #ContactForm-other-amount{
+      margin-top:18px;
+    }
+    @media(max-width: 989px) {
+        .budget-options {
+        row-gap: 20px;
+    }
+        .budget_label {
+            padding: 10px 10px;
+        }
+
+        .checkbox {
+            width: 100%;
+            padding: 0;
+        }
+      .checkbox label {
+        font-size: 16px;
+      }
+      .custom-contact-form .contact__fields {
+        flex-direction:column;
+      }
+        .custom-contact-form {
+        padding: 25px !important;
+        }
+    }
+</style>
+{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  .contact-sub-heading h2{
+    margin-top:10px;
+  }
+  .contact-sub-heading p{
+    color:#000;
+  }
+    .checkboxes label{
+      color:#000;
+    }
+     .custom-contact-form .title{
+          font-weight: bold;
+          letter-spacing: normal;
+    }
+
+     .custom-contact-form .field{
+        outline: unset;
+        outline-offset: unset;
+        box-shadow: unset;
+      }
+
+   .custom-contact-form .field__input{
+      background-color:#E8E9EB;
+     line-height:1.5;
+     letter-spacing:.1rem;
+    }
+    .custom-contact-form .field::after {
+      content: unset !important;
+    }
+    .custom-contact-form .page-width--narrow {
+      max-width: 100%;
+      padding: 0;
+      margin:0 auto;
+    }
+    .custom-contact-form{
+      padding:50px;
+    }
+    .custom-contact-form .field__label{
+      color:black;
+    }
+   .custom-contact-form .contact__fields {
+      display:flex;
+    }
+    .custom-contact-form .select-field .field__input{
+      padding:0 1.5rem;
+    }
+    .other-option{
+      margin: 0;
+      background: #E8E9EB;
+      width: 100%;
+      max-width: 362px;
+      padding-left: 10px;
+    }
+
+    .other-option p{
+      font-size: 23px;
+      margin: 0;
+    }
+    .text-field .field{
+      margin-bottom:4px;
+    }
+    .radio-button label{
+      color:black;
+    }
+  .radio-option{
+        accent-color: #000;
+  }
+  .form{
+ float:left;  
+  list-style:none;
+}
+.hidden-form{
+  visibility:hidden;
+  }
+.show-form{
+visibility: visible !important;
+}
+{%- endstyle -%}
+
+<div class=" gradient custom-contact-form page-width">
+  <div class="contact page-width page-width--narrow section-{{ section.id }}-padding">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="title title-wrapper--no-top-margin {{ section.settings.heading_size }}">
+        {{ section.settings.heading | escape }}
+      </h2>
+    {%- else -%}
+      <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
+    {%- endif -%}
+    {%- form 'contact', id: 'ContactForm', class: 'isolate' -%}
+      {%- if form.posted_successfully? -%}
+        <div class="form-status form-status-list form__message" tabindex="-1" autofocus>
+          {% render 'icon-success' %}
+          {{ 'templates.contact.form.post_success' | t }}
+        </div>
+      {%- elsif form.errors -%}
+        <div class="form__message">
+          <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+            {% render 'icon-error' %}
+            {{ 'templates.contact.form.error_heading' | t }}
+          </h2>
+        </div>
+        <ul class="form-status-list caption-large" role="list">
+          <li>
+            <a href="#ContactForm-email" class="link">
+              {{ form.errors.translated_fields.email | capitalize }}
+              {{ form.errors.messages.email }}
+            </a>
+          </li>
+        </ul>
+      {%- endif -%}
+      <div class="contact__fields">
+        <div class="field">
+          <input
+            class="field__input"
+            autocomplete="given-name"
+            type="text"
+            id="ContactForm-firstname"
+            name="contact[{{ 'templates.contact.form.firstname' | t }}]"
+            value="{% if form.firstname %}{{ form.firstname }}{% elsif customer %}{{ customer.firstname }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.firstname' | t }}"
+          >
+          <label class="field__label" for="ContactForm-firstname">{{ 'templates.contact.form.firstname' | t }}</label>
+        </div>
+        <div class="field">
+          <input
+            class="field__input"
+            autocomplete="family-name"
+            type="text"
+            id="ContactForm-lastname"
+            name="contact[{{ 'templates.contact.form.lastname' | t }}]"
+            value="{% if form.lastname %}{{ form.lastname }}{% elsif customer %}{{ customer.lastname }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.lastname' | t }}"
+          >
+          <label class="field__label" for="ContactForm-lastname">{{ 'templates.contact.form.lastname' | t }}</label>
+        </div>
+        <div class="field">
+          <input
+            class="field__input"
+            autocomplete="organization"
+            type="text"
+            id="ContactForm-company"
+            name="contact[{{ 'templates.contact.form.company' | t }}]"
+            value="{% if form.company %}{{ form.company }}{% elsif customer %}{{ customer.company }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.company' | t }}"
+          >
+          <label class="field__label" for="ContactForm-company">{{ 'templates.contact.form.company' | t }}</label>
+        </div>
+      </div>
+
+      <div class="contact__fields">
+        <div class="field field--with-error">
+          <input
+            autocomplete="email"
+            type="email"
+            id="ContactForm-email"
+            class="field__input"
+            name="contact[email]"
+            spellcheck="false"
+            autocapitalize="off"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            aria-="true"
+            {% if form.errors contains 'email' %}
+              aria-invalid="true"
+              aria-describedby="ContactForm-email-error"
+            {% endif %}
+            placeholder="{{ 'templates.contact.form.email' | t }}"
+          >
+          <label class="field__label" for="ContactForm-email">
+            {{- 'templates.contact.form.email' | t }}
+            <span aria-hidden="true">*</span></label
+          >
+          {%- if form.errors contains 'email' -%}
+            <small class="contact__field-error" id="ContactForm-email-error">
+              <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+              <span class="form__message">
+                {%- render 'icon-error' -%}
+                {{- form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email -}}
+              </span>
+            </small>
+          {%- endif -%}
+        </div>
+        <div class="field">
+          <input
+            class="field__input"
+            autocomplete="url"
+            type="text"
+            id="ContactForm-website"
+            name="contact[{{ 'templates.contact.form.website' | t }}]"
+            value="{% if form.website %}{{ form.website }}{% elsif customer %}{{ customer.website }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.website' | t }}"
+          >
+          <label class="field__label" for="ContactForm-website">{{ 'templates.contact.form.website' | t }}</label>
+        </div>
+      </div>
+
+      <div class="contact__fields">
+        <div class="field">
+          <input
+            class="field__input"
+            autocomplete="street-address"
+            type="text"
+            id="ContactForm-address"
+            name="contact[{{ 'templates.contact.form.address' | t }}]"
+            value="{% if form.address %}{{ form.address }}{% elsif customer %}{{ customer.address }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.address' | t }}"
+          >
+          <label class="field__label" for="ContactForm-address">{{ 'templates.contact.form.address' | t }}</label>
+        </div>
+        <div class="field">
+          <input
+            class="field__input"
+            autocomplete="address-level2"
+            type="text"
+            id="ContactForm-city"
+            name="contact[{{ 'templates.contact.form.city' | t }}]"
+            value="{% if form.city %}{{ form.city }}{% elsif customer %}{{ customer.city }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.city' | t }}"
+          >
+          <label class="field__label" for="ContactForm-city">{{ 'templates.contact.form.city' | t }}</label>
+        </div>
+        <div class="field">
+          <input
+            class="field__input"
+            autocomplete="address-level1"
+            type="text"
+            id="ContactForm-state"
+            name="contact[{{ 'templates.contact.form.state' | t }}]"
+            value="{% if form.state %}{{ form.state }}{% elsif customer %}{{ customer.state }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.state' | t }}"
+          >
+          <label class="field__label" for="ContactForm-state">{{ 'templates.contact.form.state' | t }}</label>
+        </div>
+      </div>
+
+      <div class="contact__fields">
+        <div class="field">
+          <input
+            class="field__input"
+            autocomplete="postal-code"
+            type="text"
+            id="ContactForm-zip"
+            name="contact[{{ 'templates.contact.form.zip' | t }}]"
+            value="{% if form.zip %}{{ form.zip }}{% elsif customer %}{{ customer.zip }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.zip' | t }}"
+          >
+          <label class="field__label" for="ContactForm-zip">{{ 'templates.contact.form.zip' | t }}</label>
+        </div>
+        <div class="field">
+          <input
+            class="field__input"
+            autocomplete="tel"
+            type="tel"
+            id="ContactForm-phone"
+            name="contact[{{ 'templates.contact.form.phone' | t }}]"
+            value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.phone' | t }}"
+          >
+          <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+        </div>
+        <div class="field select-field">
+          <label class="field__label" for="ContactForm-how-heard">How did you hear about us?</label>
+          <select
+            class="field__input"
+            id="ContactForm-how-heard"
+            name="contact[{{ 'templates.contact.form.how_heard' | t }}]"
+          >
+            <option value="" selected disabled hidden>How did you hear about us?</option>
+            <option value="Facebook">Facebook</option>
+            <option value="YouTube">YouTube</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Twitter">Twitter</option>
+            <option value="Google Search">Google Search</option>
+            <option value="Google Ad">Google Ad</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="Referral">Referral</option>
+            <option value="Email Campaign">Email Campaign</option>
+            <option value="TikTok">TikTok</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="radio-button">
+        <div class="radio-option">
+          <input
+            type="radio"
+            id="newsletter_yes"
+            name="contact[contact_time_1]"
+            value="{{ 'Yes, I would like to sign up for the email newsletter' }}"
+          >
+          <label for="newsletter_yes">{{ 'Yes, I would like to sign up for the email newsletter' }}</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" id="newsletter_no" name="contact[contact_time_1]" value="{{ 'Not today' }}">
+          <label for="newsletter_no">{{ 'Not today' }}</label>
+        </div>
+      </div>
+      <div class="contact-sub-heading">
+        <h2 class="title h1" style="margin-bottom: 0;">{{ section.settings.conatct_heading2 }}</h2>
+        <p style="margin: 0;">{{ section.settings.conatct_info }}</p>
+      </div>
+      <div class="checkboxes">
+        {% for block in section.blocks %}
+          {%- case block.type -%}
+            {% when 'Branding' %}
+              <div class="checkbox-1 checkbox">
+                <h2 class="title title-wrapper--no-top-margin h1">{{ block.settings.branding_heading }}</h2>
+                {%- if block.settings.branding_id1 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.branding_id1 | replace: ' ','_' }}"
+                      name="contact[Brandding]"
+                      value="{{ block.settings.branding_id1 }}"
+                    >
+                    <label for="{{ block.settings.branding_id1 | replace: ' ','_' }}">
+                      {{- block.settings.branding_id1 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.branding_id2 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.branding_id2 | replace: ' ','_' }}"
+                      name="contact[Brandding]"
+                      value="{{ block.settings.branding_id2 }}"
+                    >
+                    <label for="{{ block.settings.branding_id2 | replace: ' ','_' }}">
+                      {{- block.settings.branding_id2 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.branding_id3 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.branding_id3 | replace: ' ','_' }}"
+                      name="contact[Brandding]"
+                      value="{{ block.settings.branding_id3 }}"
+                    >
+                    <label for="{{ block.settings.branding_id3 | replace: ' ','_' }}">
+                      {{- block.settings.branding_id3 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.branding_id4 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.branding_id4 | replace: ' ','_' }}"
+                      name="contact[Brandding]"
+                      value="{{ block.settings.branding_id4 }}"
+                    >
+                    <label for="{{ block.settings.branding_id4 | replace: ' ','_' }}">
+                      {{- block.settings.branding_id4 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.branding_id5 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.branding_id5 | replace: ' ','_' }}"
+                      name="contact[Brandding]"
+                      value="{{ block.settings.branding_id5 }}"
+                    >
+                    <label for="{{ block.settings.branding_id5 | replace: ' ','_' }}">
+                      {{- block.settings.branding_id5 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.branding_id6 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.branding_id6 | replace: ' ','_' }}"
+                      name="contact[Brandding]"
+                      value="{{ block.settings.branding_id6 }}"
+                    >
+                    <label for="{{ block.settings.branding_id6 | replace: ' ','_' }}">
+                      {{- block.settings.branding_id6 -}}
+                    </label>
+                  </div>
+                {% endif %}
+              </div>
+            {% when 'Digital' %}
+              <div class="checkbox-2 checkbox">
+                <h2 class="title title-wrapper--no-top-margin h1">{{ block.settings.digital_heading }}</h2>
+                {%- if block.settings.digital_id1 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.digital_id1 | replace: ' ','_' }}"
+                      name="contact[digital]"
+                      value="{{ block.settings.digital_id1 }}"
+                    >
+                    <label for="{{ block.settings.digital_id1 | replace: ' ','_' }}">
+                      {{- block.settings.digital_id1 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.digital_id2 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.digital_id2| replace: ' ','_' }}"
+                      name="contact[digital]"
+                      value="{{ block.settings.digital_id2 }}"
+                    >
+                    <label for="{{ block.settings.digital_id2 | replace: ' ','_' }}">
+                      {{- block.settings.digital_id2 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.digital_id3 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.digital_id3 | replace: ' ','_' }}"
+                      name="contact[digital]"
+                      value="{{ block.settings.digital_id3 }}"
+                    >
+                    <label for="{{ block.settings.digital_id3 | replace: ' ','_' }}">
+                      {{- block.settings.digital_id3 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.digital_id4 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.digital_id4 | replace: ' ','_' }}"
+                      name="contact[digital]"
+                      value="{{ block.settings.digital_id4 }}"
+                    >
+                    <label for="{{ block.settings.digital_id4 | replace: ' ','_' }}">
+                      {{- block.settings.digital_id4 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.digital_id5 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.digital_id5 | replace: ' ','_' }}"
+                      name="contact[digital]"
+                      value="{{ block.settings.digital_id5 }}"
+                    >
+                    <label for="{{ block.settings.digital_id5 | replace: ' ','_' }}">
+                      {{- block.settings.digital_id5 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.digital_id6 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.digital_id6 | replace: ' ','_' }}"
+                      name="contact[digital]"
+                      value="{{ block.settings.digital_id6 }}"
+                    >
+                    <label for="{{ block.settings.digital_id6 | replace: ' ','_' }}">
+                      {{- block.settings.digital_id6 -}}
+                    </label>
+                  </div>
+                {% endif %}
+              </div>
+            {% when 'Print' %}
+              <div class="checkbox-3 checkbox">
+                <h2 class="title title-wrapper--no-top-margin h1">{{ block.settings.print_heading }}</h2>
+                {%- if block.settings.print_id1 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.print_id1 | replace: ' ','_' }}"
+                      name="contact[print]"
+                      value="{{ block.settings.print_id1 }}"
+                    >
+                    <label for="{{ block.settings.print_id1 | replace: ' ','_' }}">
+                      {{- block.settings.print_id1 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.print_id2 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.print_id2 | replace: ' ','_' }}"
+                      name="contact[print]"
+                      value="{{ block.settings.print_id2 }}"
+                    >
+                    <label for="{{ block.settings.print_id2 | replace: ' ','_' }}">
+                      {{- block.settings.print_id2 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.print_id3 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.print_id3 | replace: ' ','_' }}"
+                      name="contact[print]"
+                      value="{{ block.settings.print_id3 }}"
+                    >
+                    <label for="{{ block.settings.print_id3 | replace: ' ','_' }}">
+                      {{- block.settings.print_id3 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.print_id4 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.print_id4 | replace: ' ','_' }}"
+                      name="contact[print]"
+                      value="{{ block.settings.print_id4 }}"
+                    >
+                    <label for="{{ block.settings.print_id4 | replace: ' ','_' }}">
+                      {{- block.settings.print_id4 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.print_id5 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.print_id5 | replace: ' ','_' }}"
+                      name="contact[print]"
+                      value="{{ block.settings.print_id5 }}"
+                    >
+                    <label for="{{ block.settings.print_id5 | replace: ' ','_' }}">
+                      {{- block.settings.print_id5 -}}
+                    </label>
+                  </div>
+                {% endif %}
+                {%- if block.settings.print_id6 != blank -%}
+                  <div>
+                    <input
+                      type="checkbox"
+                      id="{{ block.settings.print_id6 | replace: ' ','_' }}"
+                      name="contact[print]"
+                      value="{{ block.settings.print_id6 }}"
+                    >
+                    <label for="{{ block.settings.print_id6 | replace: ' ','_' }}">
+                      {{- block.settings.print_id6 -}}
+                    </label>
+                  </div>
+                {% endif %}
+              </div>
+            {% when 'Text' %}
+              <div class="other-option">
+                <p>{{ block.settings.text_info }}</p>
+              </div>
+            {% when 'Budget' %}
+              <div class="budget">
+                <h2 class="title title-wrapper--no-top-margin h1">{{ block.settings.budget_heading }}</h2>
+                <div id="budget_options" class="budget-options">
+                  {% if block.settings.budget_id1 != blank %}
+                    <div>
+                      <input
+                        type="radio"
+                        class="visually-hidden"
+                        id="{{ block.settings.budget_id1 | replace: ' ', '_' }}"
+                        name="contact[Budget]"
+                        value="{{ block.settings.budget_id1 }}"
+                      >
+                      <label for="{{ block.settings.budget_id1 | replace: ' ', '_' }}" class="budget_label">
+                        {{- block.settings.budget_id1 -}}
+                      </label>
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.budget_id2 != blank %}
+                    <div>
+                      <input
+                        type="radio"
+                        class="visually-hidden"
+                        id="{{ block.settings.budget_id2 | replace: ' ', '_' }}"
+                        name="contact[Budget]"
+                        value="{{ block.settings.budget_id2 }}"
+                      >
+                      <label for="{{ block.settings.budget_id2 | replace: ' ', '_' }}" class="budget_label">
+                        {{- block.settings.budget_id2 -}}
+                      </label>
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.budget_id3 != blank %}
+                    <div>
+                      <input
+                        type="radio"
+                        class="visually-hidden"
+                        id="{{ block.settings.budget_id3 | replace: ' ', '_' }}"
+                        name="contact[Budget]"
+                        value="{{ block.settings.budget_id3 }}"
+                      >
+                      <label for="{{ block.settings.budget_id3 | replace: ' ', '_' }}" class="budget_label">
+                        {{- block.settings.budget_id3 -}}
+                      </label>
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.budget_id4 != blank %}
+                    <div>
+                      <input
+                        type="radio"
+                        class="visually-hidden"
+                        id="{{ block.settings.budget_id4 | replace: ' ', '_' }}"
+                        name="contact[Budget]"
+                        value="{{ block.settings.budget_id4 }}"
+                      >
+                      <label for="{{ block.settings.budget_id4 | replace: ' ', '_' }}" class="budget_label">
+                        {{- block.settings.budget_id4 -}}
+                      </label>
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.budget_id5 != blank %}
+                    <div>
+                      <input
+                        type="radio"
+                        class="visually-hidden"
+                        id="{{ block.settings.budget_id5 | replace: ' ', '_' }}"
+                        name="contact[Budget]"
+                        value="{{ block.settings.budget_id5 }}"
+                      >
+                      <label for="{{ block.settings.budget_id5 | replace: ' ', '_' }}" class="budget_label">
+                        {{- block.settings.budget_id5 -}}
+                      </label>
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.budget_id6 != blank %}
+                    <div>
+                      <input
+                        type="radio"
+                        class="visually-hidden"
+                        id="{{ block.settings.budget_id6 | replace: ' ', '_' }}"
+                        name="contact[Budget]"
+                        value="{{ block.settings.budget_id6 }}"
+                      >
+                      <label for="{{ block.settings.budget_id6 | replace: ' ', '_' }}" class="budget_label">
+                        {{- block.settings.budget_id6 -}}
+                      </label>
+                    </div>
+                  {% endif %}
+                </div>
+
+                <div class="text-field">
+                  <div class="field" id="textboxContainer">
+                    <textarea
+                      rows="5"
+                      id="ContactForm-other-amount"
+                      class="text-area field__input"
+                      name="contact[Other_Amount]"
+                      placeholder="Other_Amount"
+                      maxlength="20"
+                    >
+        </textarea>
+                    <label class="form__label field__label" for="ContactForm-other-amount"> Other Amount </label>
+                  </div>
+                </div>
+              </div>
+          {%- endcase -%}
+        {% endfor %}
+      </div>
+      <div class="text-field">
+        <div class="field">
+          <textarea
+            rows="10"
+            id="ContactForm-body"
+            class="text-area field__input"
+            name="contact[{{ 'templates.contact.form.comment' | t }}]"
+            placeholder="Please tell us about your project"
+            maxlength="255"
+          >
+          {{- form.body -}}
+        </textarea>
+          <label class="form__label field__label" for="ContactForm-body"> Please tell us about your project </label>
+        </div>
+      </div>
+      <span id="current">0</span> of <span id="maximum">255</span> max characters
+      <div class="contact__button">
+        <button type="submit" class="button">SUBMIT</button>
+      </div>
+    {%- endform -%}
+  </div>
+</div>
+<script>
+  var header = document.getElementById("myDIV");
+  var btns = document.getElementsByClassName("budget_label");
+  for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function () {
+          var current = document.getElementsByClassName("active");
+          if (current.length > 0) {
+              current[0].className = current[0].className.replace(" active", "");
+          }
+          this.className += " active";
+      });
+  }
+  var radioContainer = document.getElementById("budget_options");
+  var radioButtons = radioContainer.querySelectorAll('input[type="radio"]');
+  var textboxContainer = document.getElementById("textboxContainer");
+  radioButtons.forEach(function (radioButton) {
+      radioButton.addEventListener("change", function () {
+          if (this.value === "Other Amount") {
+              textboxContainer.style.display = "block";
+          } else {
+              textboxContainer.style.display = "none";
+          }
+      });
+  });
+  document.getElementById('ContactForm-body').addEventListener('input', function () {
+      var characterCount = this.value.length;
+      var current = document.getElementById('current');
+      var maximum = document.getElementById('maximum');
+      var theCount = document.getElementById('the-count');
+
+      current.textContent = characterCount;
+  });
+</script>
+
+{% schema %}
+{
+  "name": "New Contact Form",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Contact form",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+     {
+      "type": "text",
+      "id": "conatct_heading2",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "conatct_info",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+       {
+      "name": "Branding",
+      "type": "Branding",
+      "settings": [
+        {
+          "type": "text",
+          "id": "branding_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "branding_id1",
+          "label": "Option 1"
+        },
+        {
+          "type": "text",
+          "id": "branding_id2",
+          "label": "Option 2"
+        },
+        {
+          "type": "text",
+          "id": "branding_id3",
+          "label": "Option 3"
+        },
+        {
+          "type": "text",
+          "id": "branding_id4",
+          "label": "Option 4"
+        }
+,
+      {
+          "type": "text",
+          "id": "branding_id5",
+          "label": "Option 5"
+        },
+      {
+          "type": "text",
+          "id": "branding_id6",
+          "label": "Option 6"
+        }
+      ]
+    },
+    {
+      "name": "Digital",
+      "type": "Digital",
+      "settings": [
+        {
+          "type": "text",
+          "id": "digital_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "digital_id1",
+          "label": "Option 1"
+        },
+        {
+          "type": "text",
+          "id": "digital_id2",
+          "label": "Option 2"
+        },
+        {
+          "type": "text",
+          "id": "digital_id3",
+          "label": "Option 3"
+        },
+        {
+          "type": "text",
+          "id": "digital_id4",
+          "label": "Option 4"
+        }
+,
+      {
+          "type": "text",
+          "id": "digital_id5",
+          "label": "Option 5"
+        },
+      {
+          "type": "text",
+          "id": "digital_id6",
+          "label": "Option 6"
+        }
+      ]
+    },
+   {
+      "name": "Print",
+      "type": "Print",
+      "settings": [
+        {
+          "type": "text",
+          "id": "print_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "print_id1",
+          "label": "Option 1"
+        },
+        {
+          "type": "text",
+          "id": "print_id2",
+          "label": "Option 2"
+        },
+        {
+          "type": "text",
+          "id": "print_id3",
+          "label": "Option 3"
+        },
+        {
+          "type": "text",
+          "id": "print_id4",
+          "label": "Option 4"
+        },
+      {
+          "type": "text",
+          "id": "print_id5",
+          "label": "Option 5"
+        },
+      {
+          "type": "text",
+          "id": "print_id6",
+          "label": "Option 6"
+        }
+      ]
+    },
+    {
+      "name": "Text",
+      "type": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text_info",
+          "label": "Text"
+        }
+      ]
+    },
+     {
+      "name": "Budget",
+      "type": "Budget",
+      "settings": [
+        {
+          "type": "text",
+          "id": "budget_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "budget_id1",
+          "label": "Option 1"
+        },
+        {
+          "type": "text",
+          "id": "budget_id2",
+          "label": "Option 2"
+        },
+        {
+          "type": "text",
+          "id": "budget_id3",
+          "label": "Option 3"
+        },
+        {
+          "type": "text",
+          "id": "budget_id4",
+          "label": "Option 4"
+        }
+,
+      {
+          "type": "text",
+          "id": "budget_id5",
+          "label": "Option 5"
+        },
+      {
+          "type": "text",
+          "id": "budget_id6",
+          "label": "Option 6"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "New Contact Form"
+    }
+  ]
+}
+{% endschema %}
