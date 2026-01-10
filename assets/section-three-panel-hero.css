@@ -92,7 +92,7 @@
 /* Content Container */
 .three-panel-hero__content {
   position: relative;
-  z-index: 10;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
