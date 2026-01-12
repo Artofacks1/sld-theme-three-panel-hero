@@ -18,12 +18,14 @@
   letter-spacing: 0.1em; /* tracking-widest */
   margin-bottom: 1.5rem; /* 24px */
   font-family: var(--font-body-family);
+  border-radius: 4px; /* Subtle rounded corners */
 }
 
 /* Split Title - "CHAMPIONSHIP GRADE" */
 .featured-collection__title {
   font-size: 2.25rem; /* 36px mobile */
   font-weight: 700; /* Bold */
+  font-style: italic; /* Italicized to match design */
   text-transform: uppercase;
   letter-spacing: -0.025em; /* tight tracking */
   line-height: 1.2;

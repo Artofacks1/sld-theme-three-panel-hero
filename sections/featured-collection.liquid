@@ -51,23 +51,25 @@
       <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
         {%- if section.settings.title != blank -%}
           <div class="featured-collection__header">
-            {%- comment -%} Badge/Eyebrow Label {%- endcomment -%}
-            <div class="featured-collection__badge">FEATURED PRODUCTS</div>
+            {%- comment -%} Badge/Eyebrow Label - Dynamic {%- endcomment -%}
+            {%- if section.settings.badge_text != blank -%}
+              <div class="featured-collection__badge">{{ section.settings.badge_text | upcase }}</div>
+            {%- endif -%}
             
-            {%- comment -%} Split Title: "CHAMPIONSHIP GRADE" {%- endcomment -%}
+            {%- comment -%} Split Title: First part in white, last word in cyan {%- endcomment -%}
             <h2 class="featured-collection__title">
               {%- assign title_parts = section.settings.title | split: ' ' -%}
               {%- if title_parts.size >= 2 -%}
-                {%- comment -%} Split at the last word - "CHAMPIONSHIP" in white, "GRADE" in cyan {%- endcomment -%}
+                {%- comment -%} Split at the last word - First part in white, last word in cyan {%- endcomment -%}
                 {%- assign title_array_size = title_parts.size | minus: 1 -%}
                 {%- assign first_part = title_parts | slice: 0, title_array_size | join: ' ' -%}
                 {%- assign last_word = title_parts.last -%}
                 <span class="featured-collection__title-part featured-collection__title-part--white">
-                  <span class="featured-collection__accent-line-wrapper">{{ first_part }}</span>
+                  <span class="featured-collection__accent-line-wrapper">{{ first_part | upcase }}</span>
                 </span>
-                <span class="featured-collection__title-part featured-collection__title-part--cyan">{{ last_word }}</span>
+                <span class="featured-collection__title-part featured-collection__title-part--cyan">{{ last_word | upcase }}</span>
               {%- else -%}
-                <span class="featured-collection__title-part featured-collection__title-part--white">{{ section.settings.title }}</span>
+                <span class="featured-collection__title-part featured-collection__title-part--white">{{ section.settings.title | upcase }}</span>
               {%- endif -%}
             </h2>
           </div>
@@ -134,9 +136,17 @@
   "settings": [
     {
       "type": "text",
+      "id": "badge_text",
+      "default": "Featured Products",
+      "label": "Badge Text",
+      "info": "Text displayed in the badge above the title (e.g., 'Featured Products')"
+    },
+    {
+      "type": "text",
       "id": "title",
-      "default": "Featured collection",
-      "label": "t:sections.featured-collection.settings.title.label"
+      "default": "Championship Grade",
+      "label": "t:sections.featured-collection.settings.title.label",
+      "info": "Title will be split: first part in white, last word in cyan blue"
     },
     {
       "type": "select",
