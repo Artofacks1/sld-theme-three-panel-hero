@@ -111,7 +111,7 @@
   letter-spacing: -0.025em; /* Tight tracking */
   font-style: italic;
   color: #ffffff;
-  margin: 0 0 1rem 0; /* 16px bottom margin */
+  margin: 0 0 var(--spacing-component-small) 0; /* 1.5rem (24px) bottom margin - consistent spacing */
   line-height: 1.25;
   transform: scale(1);
   transition: transform 500ms ease;
@@ -123,7 +123,7 @@
 /* Description Typography - Hidden on Mobile */
 .three-panel-hero__description {
   display: none; /* Hidden on mobile (< 768px) */
-  margin: 0 0 2rem 0; /* 32px bottom margin */
+  margin: 0 0 var(--spacing-component-medium) 0; /* 2rem (32px) bottom margin - consistent spacing */
   color: rgba(255, 255, 255, 0.9); /* 90% opacity */
   font-size: 0.875rem; /* 14px - will be updated in media queries */
   font-weight: 400;

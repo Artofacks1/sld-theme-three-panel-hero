@@ -37,6 +37,7 @@
   margin: 0 0 var(--spacing-component-medium) 0; /* 2rem (32px) bottom margin - consistent spacing */
   font-family: var(--font-heading-family);
   display: block; /* Changed from inline-block to ensure it's on its own line */
+  text-align: center; /* Explicitly center the title text */
   width: 100%; /* Full width for proper centering */
 }
 

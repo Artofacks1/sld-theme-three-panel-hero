@@ -201,7 +201,7 @@
 .service-features__divider {
   border-top: 1px solid rgba(255, 255, 255, 0.1); /* 10% white */
   width: 100%;
-  margin-top: 4rem; /* 64px (mt-16) */
+  margin-top: var(--spacing-component-large); /* 3rem (48px) - consistent spacing */
 }
 
 /* Focus States for Accessibility */
