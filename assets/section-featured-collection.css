@@ -1,0 +1,70 @@
+/* Featured Collection Header Styles */
+
+.featured-collection__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* Badge/Eyebrow Label */
+.featured-collection__badge {
+  display: inline-block;
+  padding: 0.5rem 1.5rem; /* 8px vertical, 24px horizontal */
+  border: 1px solid rgba(0, 180, 216, 0.3); /* Light blue 30% opacity */
+  background-color: rgba(0, 180, 216, 0.05); /* Light blue 5% opacity */
+  color: #00b4d8; /* Light blue text */
+  font-size: 0.75rem; /* 12px */
+  font-weight: 700; /* Bold */
+  text-transform: uppercase;
+  letter-spacing: 0.1em; /* tracking-widest */
+  margin-bottom: 1.5rem; /* 24px */
+  font-family: var(--font-body-family);
+}
+
+/* Split Title - "CHAMPIONSHIP GRADE" */
+.featured-collection__title {
+  font-size: 2.25rem; /* 36px mobile */
+  font-weight: 700; /* Bold */
+  text-transform: uppercase;
+  letter-spacing: -0.025em; /* tight tracking */
+  line-height: 1.2;
+  margin: 0 0 1rem 0; /* Add bottom margin for accent line */
+  font-family: var(--font-heading-family);
+  display: inline-block;
+}
+
+@media screen and (min-width: 750px) {
+  .featured-collection__title {
+    font-size: 3rem; /* 48px desktop */
+  }
+}
+
+.featured-collection__title-part {
+  display: inline;
+}
+
+.featured-collection__title-part--white {
+  color: #ffffff; /* White */
+}
+
+.featured-collection__title-part--cyan {
+  color: #00b4d8; /* Light blue */
+}
+
+/* Accent Line Wrapper - Contains first part with accent line */
+.featured-collection__accent-line-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-right: 0.5rem; /* Space between "CHAMPIONSHIP" and "GRADE" */
+}
+
+/* Accent Line - Below "CHAMPIONSHIP" only */
+.featured-collection__accent-line-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: -0.75rem; /* Position below the text */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6rem; /* 96px - short line, centered under first word */
+  height: 4px;
+  background-color: #00b4d8; /* Light blue */
+}

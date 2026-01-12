@@ -1,5 +1,6 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'section-featured-collection.css' | asset_url | stylesheet_tag }}
 
 <link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'template-collection.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -49,7 +50,27 @@
   <div class="collection section-{{ section.id }}-padding{% if section.settings.full_width %} collection--full-width{% endif %}">
       <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
         {%- if section.settings.title != blank -%}
-          <h2 class="title {{ section.settings.heading_size }}">{{ section.settings.title | escape }}</h2>
+          <div class="featured-collection__header">
+            {%- comment -%} Badge/Eyebrow Label {%- endcomment -%}
+            <div class="featured-collection__badge">FEATURED PRODUCTS</div>
+            
+            {%- comment -%} Split Title: "CHAMPIONSHIP GRADE" {%- endcomment -%}
+            <h2 class="featured-collection__title">
+              {%- assign title_parts = section.settings.title | split: ' ' -%}
+              {%- if title_parts.size >= 2 -%}
+                {%- comment -%} Split at the last word - "CHAMPIONSHIP" in white, "GRADE" in cyan {%- endcomment -%}
+                {%- assign title_array_size = title_parts.size | minus: 1 -%}
+                {%- assign first_part = title_parts | slice: 0, title_array_size | join: ' ' -%}
+                {%- assign last_word = title_parts.last -%}
+                <span class="featured-collection__title-part featured-collection__title-part--white">
+                  <span class="featured-collection__accent-line-wrapper">{{ first_part }}</span>
+                </span>
+                <span class="featured-collection__title-part featured-collection__title-part--cyan">{{ last_word }}</span>
+              {%- else -%}
+                <span class="featured-collection__title-part featured-collection__title-part--white">{{ section.settings.title }}</span>
+              {%- endif -%}
+            </h2>
+          </div>
         {%- endif -%}
         {%- if section.settings.description != blank or section.settings.show_description and section.settings.collection.description != empty -%}
           <div class="collection__description {{ section.settings.description_style }}">{%- if section.settings.show_description -%}{{ section.settings.collection.description }}{%- else -%}{{ section.settings.description }}{% endif %}</div>
