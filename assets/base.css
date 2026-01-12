@@ -724,6 +724,12 @@ details > * {
   --duration-short: 100ms;
   --duration-default: 200ms;
   --duration-long: 500ms;
+  
+  /* Spacing System - Consistent margins and padding */
+  --spacing-component-small: 1.5rem;   /* 24px - badges, small gaps, between badge and title */
+  --spacing-component-medium: 2rem;   /* 32px - between elements, title bottom margin */
+  --spacing-component-large: 3rem;     /* 48px - section headers, title wrappers */
+  --spacing-component-xlarge: 4rem;    /* 64px - major section spacing (not currently used) */
 }
 
 .underlined-link,
@@ -899,7 +905,7 @@ summary::-webkit-details-marker {
 /* component-title */
 .title,
 .title-wrapper-with-link {
-  margin: 3rem 0 2rem;
+  margin: var(--spacing-component-large) 0 var(--spacing-component-medium); /* 3rem top, 2rem bottom - consistent spacing */
 }
 
 .title-wrapper-with-link .title {
@@ -911,7 +917,7 @@ summary::-webkit-details-marker {
 }
 
 .title-wrapper {
-  margin-bottom: 3rem;
+  margin-bottom: var(--spacing-component-large); /* 3rem (48px) - consistent section header spacing */
 }
 
 .title-wrapper-with-link {
@@ -943,7 +949,7 @@ summary::-webkit-details-marker {
 @media screen and (min-width: 990px) {
   .title,
   .title-wrapper-with-link {
-    margin: 5rem 0 3rem;
+    margin: 5rem 0 var(--spacing-component-large); /* 5rem top, 3rem bottom - consistent spacing */
   }
 
   .title--primary {

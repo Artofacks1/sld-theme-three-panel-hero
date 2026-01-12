@@ -2,12 +2,16 @@
 
 .featured-collection__header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: var(--spacing-component-large); /* 3rem (48px) - consistent section header spacing */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 /* Badge/Eyebrow Label */
 .featured-collection__badge {
-  display: inline-block;
+  display: block; /* Changed from inline-block to ensure it's on its own line */
   padding: 0.5rem 1.5rem; /* 8px vertical, 24px horizontal */
   border: 1px solid rgba(0, 180, 216, 0.3); /* Light blue 30% opacity */
   background-color: rgba(0, 180, 216, 0.05); /* Light blue 5% opacity */
@@ -16,9 +20,10 @@
   font-weight: 700; /* Bold */
   text-transform: uppercase;
   letter-spacing: 0.1em; /* tracking-widest */
-  margin-bottom: 1.5rem; /* 24px */
+  margin-bottom: var(--spacing-component-small); /* 1.5rem (24px) - consistent spacing between badge and title */
   font-family: var(--font-body-family);
   border-radius: 4px; /* Subtle rounded corners */
+  width: fit-content; /* Only as wide as content */
 }
 
 /* Split Title - "CHAMPIONSHIP GRADE" */
@@ -29,9 +34,10 @@
   text-transform: uppercase;
   letter-spacing: -0.025em; /* tight tracking */
   line-height: 1.2;
-  margin: 0 0 1rem 0; /* Add bottom margin for accent line */
+  margin: 0 0 var(--spacing-component-medium) 0; /* 2rem (32px) bottom margin - consistent spacing */
   font-family: var(--font-heading-family);
-  display: inline-block;
+  display: block; /* Changed from inline-block to ensure it's on its own line */
+  width: 100%; /* Full width for proper centering */
 }
 
 @media screen and (min-width: 750px) {
