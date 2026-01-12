@@ -5,6 +5,40 @@
   color: rgb(var(--color-foreground));
 }
 
+/* Product Card Price Styles */
+.card__price {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 700; /* font-bold */
+  color: #00b4d8; /* cyan */
+  letter-spacing: 0;
+}
+
+.card__price .price-item--regular {
+  color: #00b4d8;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.card__price .price-item--sale {
+  color: #00b4d8;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.card__price.price--on-sale .price-item--regular {
+  color: rgba(255, 255, 255, 0.4); /* text-white/40 */
+  text-decoration: line-through;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 400;
+  margin-right: 0.5rem; /* gap-2 */
+}
+
+.card__price.price--on-sale .price__sale {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* gap-2 */
+}
+
 .price > * {
   display: inline-block;
   vertical-align: top;
@@ -82,6 +116,12 @@
   text-decoration: line-through;
   color: rgba(var(--color-foreground), 0.75);
   font-size: 1.3rem;
+}
+
+/* Ensure card prices don't inherit default styles */
+.card__price.price--on-sale .price-item--regular {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.875rem;
 }
 
 .unit-price {

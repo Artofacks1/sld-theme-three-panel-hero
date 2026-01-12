@@ -323,6 +323,16 @@ a.product__text {
   margin: 0;
 }
 
+/* Match featured products card font sizes */
+.product__title h1,
+.product__title h2 {
+  font-size: 1.125rem; /* text-lg - matches card__heading--product */
+  font-weight: 700; /* font-bold */
+  text-transform: uppercase;
+  letter-spacing: 0.025em; /* tracking-wide */
+  line-height: 1.4;
+}
+
 .product__title > a {
   display: none;
 }
@@ -368,12 +378,42 @@ a.product__text {
   }
   
   .product__info-container .price--on-sale .price-item--regular {
-    font-size: 1.6rem;
+    font-size: 0.875rem; /* text-sm - matches card price strikethrough */
   }
 
   .product__info-container > *:first-child {
     margin-top: 0;
   }
+}
+
+/* Match featured products card price font sizes */
+.product__info-container .price,
+.product__info-container .price--large {
+  font-size: 1.25rem; /* text-xl - matches card__price */
+  font-weight: 700; /* font-bold */
+  color: #00b4d8; /* cyan - matches card price color */
+  letter-spacing: 0;
+}
+
+.product__info-container .price .price-item--regular,
+.product__info-container .price .price-item--sale {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 700;
+  color: #00b4d8;
+}
+
+.product__info-container .price--on-sale .price-item--regular {
+  color: rgba(255, 255, 255, 0.4); /* text-white/40 */
+  text-decoration: line-through;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 400;
+  margin-right: 0.5rem; /* gap-2 */
+}
+
+.product__info-container .price--on-sale .price__sale {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* gap-2 */
 }
 
 .product__description-title {

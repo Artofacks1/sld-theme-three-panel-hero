@@ -337,3 +337,288 @@
 .card-article-info {
   margin-top: 1rem;
 }
+
+/* ============================================
+   PRODUCT CARD SPECIFIC STYLES
+   ============================================ */
+
+/* Card Wrapper - Group for hover effects */
+.card-wrapper--product {
+  position: relative;
+}
+
+/* Content Section - Product Cards */
+.card__content--product {
+  padding: 1.5rem; /* p-6 = 24px */
+  display: block;
+  grid-template-rows: none;
+}
+
+.card__content--product .card__information {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  grid-row-start: auto;
+}
+
+/* Badge - Top Right Corner */
+.card__badge--top-right {
+  position: absolute;
+  top: 1rem; /* top-4 = 16px */
+  right: 1rem; /* right-4 = 16px */
+  z-index: 10;
+  margin: 0;
+}
+
+.badge--product-card {
+  background-color: #00b4d8;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em; /* tracking-widest */
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 700; /* font-bold */
+  padding: 0.25rem 0.75rem; /* py-1 px-3 */
+  border: none;
+  border-radius: 0;
+}
+
+/* Image Container */
+.card__image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1; /* square */
+  background-color: rgba(0, 0, 0, 0.4); /* bg-black/40 */
+  overflow: hidden;
+}
+
+/* Ensure card__media works with new structure */
+.card-wrapper--product .card__media {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease; /* duration-500 */
+  display: block;
+  position: relative;
+}
+
+.card-wrapper--product:hover .card__image,
+.card-wrapper--product:hover .card__image-container .card__image:first-child {
+  transform: scale(1.1); /* group-hover:scale-110 */
+}
+
+.card__image--secondary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.5s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-wrapper--product:hover .card__image-container .card__image:first-child:not(:only-child) {
+  opacity: 0;
+}
+
+.card-wrapper--product:hover .card__image--secondary {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Gradient Overlay */
+.card__image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease; /* duration-300 */
+  pointer-events: none;
+}
+
+.card-wrapper--product:hover .card__image-overlay {
+  opacity: 1;
+}
+
+/* Quick View Button Overlay */
+.card__quick-view-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease; /* duration-300 */
+  z-index: 5;
+}
+
+.card-wrapper--product:hover .card__quick-view-overlay {
+  opacity: 1;
+}
+
+.card__quick-view-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* space-x-2 */
+  padding: 0.75rem 1.5rem; /* py-3 px-6 */
+  background-color: #00b4d8;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 0.1em; /* tracking-widest */
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 900; /* font-black */
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card__quick-view-button:hover {
+  background-color: #ffffff;
+}
+
+.card__quick-view-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.card__quick-view-button .icon-cart {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+}
+
+/* Rating */
+.card__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem; /* space-x-1 */
+  margin-bottom: 0.75rem; /* mb-3 */
+}
+
+.card__rating .rating-star {
+  width: 16px;
+  height: 16px;
+  fill: #00b4d8;
+  color: #00b4d8;
+}
+
+.card__rating-count {
+  color: rgba(255, 255, 255, 0.6); /* text-white/60 */
+  font-size: 0.75rem; /* text-xs */
+  margin-left: 0.5rem; /* ml-2 */
+}
+
+/* Product Name */
+.card__heading--product {
+  color: #ffffff;
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 700; /* font-bold */
+  text-transform: uppercase;
+  letter-spacing: 0.025em; /* tracking-wide */
+  margin-top: 0;
+  margin-bottom: 0.5rem; /* mb-2 */
+  transition: color 0.3s ease;
+  line-height: 1.4;
+}
+
+.card__heading--product a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-wrapper--product:hover .card__heading--product {
+  color: #00b4d8; /* group-hover:text-[#00b4d8] */
+}
+
+/* Product Description */
+.card__description {
+  color: rgba(255, 255, 255, 0.5); /* text-white/50 */
+  font-size: 0.75rem; /* text-xs */
+  text-transform: uppercase;
+  letter-spacing: 0.05em; /* tracking-wider */
+  margin-bottom: 1rem; /* mb-4 */
+  line-height: 1.5;
+}
+
+/* Price Section */
+.card__price-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem; /* pt-4 */
+  border-top: 1px solid rgba(0, 180, 216, 0.1); /* border-t border-[#00b4d8]/10 */
+  margin-top: 1rem;
+  margin-bottom: 0.75rem; /* mb-3 - only if Customize button exists, but we're not adding it */
+}
+
+.card__price-wrapper {
+  flex: 1;
+}
+
+/* View Details Link */
+.card__view-details {
+  color: rgba(255, 255, 255, 0.6); /* text-white/60 */
+  font-size: 0.75rem; /* text-xs */
+  text-transform: uppercase;
+  letter-spacing: 0.05em; /* tracking-wider */
+  font-weight: 700; /* font-bold */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.card__view-details:hover {
+  color: #00b4d8; /* hover:text-[#00b4d8] */
+}
+
+/* Bottom Accent Line */
+.card-wrapper--product .card__accent-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px; /* h-1 = 4px */
+  background-color: #00b4d8;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease; /* duration-300 */
+  z-index: 2;
+}
+
+.card-wrapper--product:hover .card__accent-line {
+  transform: scaleX(1); /* group-hover:scale-x-100 */
+}
+
+/* Ensure card has relative positioning for absolute children */
+.card-wrapper--product .card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-wrapper--product .card__inner {
+  position: relative;
+}
+
+/* Update existing hover border color to work with new structure */
+.card-wrapper--product:hover .card--card,
+.card-wrapper--product:hover .card--standard .card__inner {
+  border-color: #00b4d8;
+  transition: border-color 0.3s ease;
+}
+
+/* Update bottom accent line to use new class instead of ::before */
+@media screen and (min-width: 990px) {
+  .card--card::before,
+  .card--standard .card__inner::before {
+    display: none; /* Disable old accent line */
+  }
+}
